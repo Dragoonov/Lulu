@@ -8,11 +8,15 @@ public class ShapeController : MonoBehaviour
     bool rising;
     private float scaleUpFactor = 100.3f;
     private float scaleDownFactor = 25f;
+    Color currentColor;
+    private ColorHolderController colorHolder;
 
     void Start()
     {
         rising = true;
         Debug.Log(transform.localScale);
+        currentColor = GetComponent<SpriteRenderer>().color;
+        colorHolder = GameObject.Find("ColorHolder").GetComponent<ColorHolderController>();
     }
 
     // Update is called once per frame
@@ -33,7 +37,6 @@ public class ShapeController : MonoBehaviour
         scale.x += scaleUpFactor * Time.deltaTime;
         scale.y += scaleUpFactor * Time.deltaTime;
         transform.localScale = scale;
-        Debug.Log(transform.localScale);
     }
 
     private void Shrink()
@@ -42,8 +45,17 @@ public class ShapeController : MonoBehaviour
         scale.x -= scaleDownFactor * Time.deltaTime;
         scale.y -= scaleDownFactor * Time.deltaTime;
         transform.localScale = scale;
-        Debug.Log(transform.localScale);
         if (transform.localScale.x < 0.01f)
             Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        colorHolder.AddColor(currentColor);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        colorHolder.RemoveColor(currentColor);
     }
 }

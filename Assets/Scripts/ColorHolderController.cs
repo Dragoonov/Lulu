@@ -6,23 +6,38 @@ public class ColorHolderController : MonoBehaviour
 {
     private SpriteRenderer renderer;
     List<Color> colors;
+    HashSet<string> assignableShapes;
+    public bool isDragging;
+
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         Debug.Log(renderer);
         colors = new List<Color>();
+        assignableShapes = new HashSet<string>();
     }
 
-    public void AddColor(Color color)
+    void Update()
+    {
+        if (isDragging)
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            transform.Translate(mousePosition);
+        }
+    }
+
+    public void AddColor(Color color, string shape)
     {
         if(!colors.Contains(color))
             colors.Add(color);
+        assignableShapes.Add(shape);
         UpdateColor();
     }
 
-    public void RemoveColor(Color color)
+    public void RemoveColor(Color color, string shape)
     {
         colors.Remove(color);
+        assignableShapes.Remove(shape);
         UpdateColor();
     }
 

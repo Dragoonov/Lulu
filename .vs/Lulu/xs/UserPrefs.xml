@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{EAB36060-8F84-DFDD-C717-233E3FF7EA9B}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ColorsController.cs">
+    <Files>
+      <File FileName="Assets/Scripts/ShapeController.cs" Line="12" Column="38" />
+      <File FileName="Assets/Scripts/ColorHolderController.cs" Line="18" Column="6" />
+      <File FileName="Assets/Scripts/ColorsController.cs" Line="65" Column="31" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Lulu" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="ColorsController.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="019006c9-eaad-42dc-b4c2-d9c7c0e1869c" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

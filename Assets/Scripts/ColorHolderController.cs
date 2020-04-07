@@ -26,28 +26,42 @@ public class ColorHolderController : MonoBehaviour
         }
     }
 
-    public void AddColor(Color color, string shape)
+    public void AddColorWithShape(Color color, string shape)
     {
-        if(!colors.Contains(color))
-            colors.Add(color);
+        colors.Add(color);
         assignableShapes.Add(shape);
         UpdateColor();
     }
 
-    public void RemoveColor(Color color, string shape)
+    public void RemoveColorWithShape(Color color, string shape)
     {
         colors.Remove(color);
         assignableShapes.Remove(shape);
         UpdateColor();
     }
 
+    public bool FindAcceptedShape(string shape)
+    {
+        return assignableShapes.Contains(shape);
+    }
+
     private void UpdateColor()
     {
-        // code to calculate color
-        Debug.Log(renderer);
         if (colors.Count > 0)
-            renderer.color = colors[colors.Count - 1];
+        {
+            Color color = colors[0];
+            for(int i=1;i<colors.Count;i++)
+            {
+                color = new Color(Average(color.r, colors[i].r), Average(color.g, colors[i].g), Average(color.b, colors[i].b));
+            }
+            renderer.color = color;
+        }
         else
             renderer.color = Color.white;
+    }
+
+    private float Average(float a, float b)
+    {
+        return (a + b) / 2;
     }
 }

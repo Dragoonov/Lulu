@@ -10,6 +10,7 @@ public class ShapeController : MonoBehaviour
     private float scaleDownFactor = 25f;
     Color currentColor;
     private ColorHolderController colorHolder;
+    private bool colliding;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class ShapeController : MonoBehaviour
         Debug.Log(transform.localScale);
         currentColor = GetComponent<SpriteRenderer>().color;
         colorHolder = GameObject.Find("ColorHolder").GetComponent<ColorHolderController>();
+        colliding = false;
     }
 
     // Update is called once per frame
@@ -46,14 +48,21 @@ public class ShapeController : MonoBehaviour
         scale.y -= scaleDownFactor * Time.deltaTime;
         transform.localScale = scale;
         if (transform.localScale.x < 0.01f)
+        {
+            if(colliding)
+            {
+                colorHolder.RemoveColorWithShape(currentColor, gameObject.name);
+            }
             Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name != gameObject.name && collision.gameObject.name != "ColorHolder")
         {
-            colorHolder.AddColor(currentColor,gameObject.name);
+            colorHolder.AddColorWithShape(currentColor,gameObject.name);
+            colliding = true;
         }
     }
 
@@ -61,7 +70,8 @@ public class ShapeController : MonoBehaviour
     {
         if (collision.gameObject.name != gameObject.name && collision.gameObject.name != "ColorHolder")
         {
-            colorHolder.RemoveColor(currentColor, gameObject.name);
+            colorHolder.RemoveColorWithShape(currentColor, gameObject.name);
+            colliding = false;
         }
     }
 }

@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class ColorsController : MonoBehaviour
 {
-    public Color topLeftColor;
-    public Color topRightColor;
-    public Color bottomLeftColor;
-    public Color bottomRightColor;
-
-    public GameObject topLeftShape;
-    public GameObject topRightShape;
-    public GameObject bottomLeftShape;
-    public GameObject bottomRightShape;
+    public BlueprintController topLeftBlueprint;
+    public BlueprintController topRightBlueprint;
+    public BlueprintController bottomLeftBlueprint;
+    public BlueprintController bottomRightBlueprint;
 
     GameObject holderCopy;
 
@@ -28,7 +23,6 @@ public class ColorsController : MonoBehaviour
             Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             Vector2 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(objPosition, Vector2.zero);
-            GameObject shapeObj = null;
             if(hit.collider != null && hit.collider.gameObject.name == "ColorHolder")
             {
                 holderCopy = Instantiate(hit.collider.gameObject);
@@ -39,22 +33,20 @@ public class ColorsController : MonoBehaviour
             {
                 if (objPosition.x < 0 && objPosition.y > 0)
                 {
-                    shapeObj = Instantiate(topLeftShape, objPosition, Quaternion.identity);
+                    topLeftBlueprint.CreateShape(objPosition);
                 }
                 else if (objPosition.x > 0 && objPosition.y > 0)
                 {
-                    shapeObj = Instantiate(topRightShape, objPosition, Quaternion.identity);
+                    topRightBlueprint.CreateShape(objPosition);
                 }
                 else if (objPosition.x < 0 && objPosition.y < 0)
                 {
-                    shapeObj = Instantiate(bottomLeftShape, objPosition, Quaternion.identity);
+                    bottomLeftBlueprint.CreateShape(objPosition);
                 }
                 else if (objPosition.x > 0 && objPosition.y < 0)
                 {
-                    shapeObj = Instantiate(bottomRightShape, objPosition, Quaternion.identity);
+                    bottomRightBlueprint.CreateShape(objPosition);
                 }
-                shapeObj.GetComponent<Rigidbody2D>().simulated = true;
-                shapeObj.GetComponent<ShapeController>().enabled = true;
             }
         }
         if(Input.GetMouseButtonUp(0))
@@ -63,30 +55,39 @@ public class ColorsController : MonoBehaviour
             {
                 Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 Vector2 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                Color holderColor = holderCopy.GetComponent<SpriteRenderer>().color;
+                Destroy(holderCopy);
+                holderCopy = null;
                 RaycastHit2D hit = Physics2D.Raycast(objPosition, Vector2.zero);
-                if(hit.collider != null)
+                if (hit.collider != null)
                 {
-                    Color holderColor = hit.collider.gameObject.GetComponent<SpriteRenderer>().color;
+                    Debug.Log(hit.collider.gameObject + "\nColor: " + holderColor);
                     if (hit.collider.gameObject.name == "TopLeftBlueprint")
                     {
-                        topLeftShape.GetComponent<SpriteRenderer>().color = holderColor;
+                        topLeftBlueprint.ChangeColor(holderColor);
                     }
                     else if (hit.collider.gameObject.name == "TopRightBlueprint")
                     {
-                        topRightShape.GetComponent<SpriteRenderer>().color = holderColor;
+                        topRightBlueprint.ChangeColor(holderColor);
                     }
                     else if (hit.collider.gameObject.name == "BottomLeftBlueprint")
                     {
-                        bottomLeftShape.GetComponent<SpriteRenderer>().color = holderColor;
+                        bottomLeftBlueprint.ChangeColor(holderColor);
                     }
                     else if (hit.collider.gameObject.name == "BottomRightBlueprint")
                     {
-                        bottomRightShape.GetComponent<SpriteRenderer>().color = holderColor;
+                        bottomRightBlueprint.ChangeColor(holderColor);
                     }
                 }
-                Destroy(holderCopy);
-                holderCopy = null;
             }
+        }
+    }
+
+    private void GreyOutUnassignableBlueprints()
+    {
+        if(holderCopy != null)
+        {
+
         }
     }
 }

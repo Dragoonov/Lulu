@@ -329,6 +329,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TopLeftBlueprint
       objectReference: {fileID: 0}
+    - target: {fileID: 2406237846176685854, guid: d24c9b43f4ed5415d8dd8cbdaa4bad4d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7989003192704168771, guid: d24c9b43f4ed5415d8dd8cbdaa4bad4d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -638,6 +643,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BottomLeftBlueprint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496173360667907032, guid: 13e6e6b31ce1a49b1890fcf7e86ce996,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

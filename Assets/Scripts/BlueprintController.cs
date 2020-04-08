@@ -28,4 +28,16 @@ public class BlueprintController : MonoBehaviour
     {
         renderer.color = color;
     }
+
+    public string GetShapeName()
+    {
+        return shape.name;
+    }
+
+    public Color GetColor()
+    {
+        return renderer.color;
+    }
+
+
 }

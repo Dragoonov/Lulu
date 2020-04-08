@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,15 +7,19 @@ public class ColorHolderController : MonoBehaviour
 {
     private SpriteRenderer renderer;
     List<Color> colors;
-    HashSet<string> assignableShapes;
+    public HashSet<string> assignableShapes;
     public bool isDragging;
+
+    private void Awake()
+    {
+        assignableShapes = new HashSet<string>();
+    }
 
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         Debug.Log(renderer);
         colors = new List<Color>();
-        assignableShapes = new HashSet<string>();
     }
 
     void Update()
@@ -23,6 +28,7 @@ public class ColorHolderController : MonoBehaviour
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             transform.Translate(mousePosition);
+            //Debug.Log(transform.position);
         }
     }
 
@@ -50,9 +56,9 @@ public class ColorHolderController : MonoBehaviour
         if (colors.Count > 0)
         {
             Color color = colors[0];
-            for(int i=1;i<colors.Count;i++)
+            for (int i = 1; i < colors.Count; i++)
             {
-                color = new Color(Average(color.r, colors[i].r), Average(color.g, colors[i].g), Average(color.b, colors[i].b));
+                color = ProduceNewColor(color, colors[i]);
             }
             renderer.color = color;
         }
@@ -60,8 +66,17 @@ public class ColorHolderController : MonoBehaviour
             renderer.color = Color.white;
     }
 
-    private float Average(float a, float b)
+    private Color ProduceNewColor(Color color1, Color color2)
     {
-        return (a + b) / 2;
+
+        //r = 255 - Mathf.Sqrt((Mathf.Pow(255 - color1.r, 2) + Mathf.Pow(255 - color2.r, 2)) / 2),
+        //b = 255 - Mathf.Sqrt((Mathf.Pow(255 - color1.r, 2) + Mathf.Pow(255 - color2.r, 2)) / 2)
+        //g = 255 - Mathf.Sqrt((Mathf.Pow(255 - color1.r, 2) + Mathf.Pow(255 - color2.r, 2)) / 2),
+
+
+        Color newColor = (color1 + color2) / 2;
+        Debug.Log(newColor);
+        return newColor;
     }
+
 }

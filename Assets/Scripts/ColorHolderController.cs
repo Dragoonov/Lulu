@@ -12,7 +12,8 @@ public class ColorHolderController : MonoBehaviour
 
     private void Awake()
     {
-        assignableShapes = new HashSet<string>();
+        if (assignableShapes == null)
+            assignableShapes = new HashSet<string>();
     }
 
     void Start()

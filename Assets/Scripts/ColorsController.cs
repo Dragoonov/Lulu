@@ -9,11 +9,6 @@ public class ColorsController : MonoBehaviour
     public BlueprintController bottomLeftBlueprint;
     public BlueprintController bottomRightBlueprint;
 
-    private Color tempTopLeftBlueprintColor;
-    private Color temptopRightBlueprintColor;
-    private Color tempBottomLeftBlueprintColor;
-    private Color tempBottomRightBlueprintColor;
-
     GameObject holderCopy;
 
     // Update is called once per frame
@@ -35,9 +30,8 @@ public class ColorsController : MonoBehaviour
                 ColorHolderController copyController = holderCopy.GetComponent<ColorHolderController>();
                 copyController.isDragging = true;
                 copyController.assignableShapes =
-                    new HashSet<string>(hit.collider.gameObject.GetComponent<ColorHolderController>().assignableShapes);
-                Debug.Log("Copty controller shapesSet size: " + copyController.assignableShapes.Count);
-                LockUnassignableBlueprints();
+                    new HashSet<string>(GameObject.Find("ColorHolder").GetComponent<ColorHolderController>().assignableShapes);
+                DisableAssignableBlueprints();
             }
             else
             {
@@ -70,25 +64,10 @@ public class ColorsController : MonoBehaviour
                 Debug.Log("Hit: " + hit.collider.gameObject + ", started on position: " + objPosition);
                 if (hit.collider != null)
                 {
-                    UnlockUnassignableBlueprints();
+                    EnableAssignableBlueprints();
                     GameObject obj = hit.collider.gameObject;
                     Debug.Log(holderCopy.GetComponent<ColorHolderController>().assignableShapes.Count);
-                    if (obj.name == "TopLeftBlueprint")
-                    {
-                        topLeftBlueprint.ChangeColor(holderColor);
-                    }
-                    else if (obj.name == "TopRightBlueprint")
-                    {
-                        topRightBlueprint.ChangeColor(holderColor);
-                    }
-                    else if (obj.name == "BottomLeftBlueprint")
-                    {
-                        bottomLeftBlueprint.ChangeColor(holderColor);
-                    }
-                    else if (obj.name == "BottomRightBlueprint")
-                    {
-                        bottomRightBlueprint.ChangeColor(holderColor);
-                    }
+                    obj.GetComponent<SpriteRenderer>().color = holderColor;
                     Destroy(holderCopy);
                     holderCopy = null;
                 }
@@ -96,53 +75,48 @@ public class ColorsController : MonoBehaviour
         }
     }
 
-    private void LockUnassignableBlueprints()
+    private void DisableAssignableBlueprints()
     {
         if(holderCopy != null)
         {
-            tempTopLeftBlueprintColor = topLeftBlueprint.GetColor();
-            temptopRightBlueprintColor = topRightBlueprint.GetColor();
-            tempBottomLeftBlueprintColor = bottomLeftBlueprint.GetColor();
-            tempBottomRightBlueprintColor = bottomRightBlueprint.GetColor();
             ColorHolderController copyController = holderCopy.GetComponent<ColorHolderController>();
-            if(!copyController.FindAcceptedShape(topLeftBlueprint.GetShapeName() + "(Clone)"))
+            if (topLeftBlueprint.isActiveAndEnabled &&
+                (topLeftBlueprint.Locked || !copyController.FindAcceptedShape(topLeftBlueprint.GetShapeName() + "(Clone)")))
             {
-                topLeftBlueprint.ChangeColor(Color.grey);
-                topLeftBlueprint.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                topLeftBlueprint.DisableAssigning();
             }
-            if (!copyController.FindAcceptedShape(topRightBlueprint.GetShapeName() + "(Clone)"))
+            if (topRightBlueprint.isActiveAndEnabled &&
+                (topRightBlueprint.Locked || !copyController.FindAcceptedShape(topRightBlueprint.GetShapeName() + "(Clone)")))
             {
-                topRightBlueprint.ChangeColor(Color.grey);
-                topRightBlueprint.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                topRightBlueprint.DisableAssigning();
             }
-            if (!copyController.FindAcceptedShape(bottomLeftBlueprint.GetShapeName() + "(Clone)"))
+            if (bottomLeftBlueprint.isActiveAndEnabled &&
+                (bottomLeftBlueprint.Locked || !copyController.FindAcceptedShape(bottomLeftBlueprint.GetShapeName() + "(Clone)")))
             {
-                bottomLeftBlueprint.ChangeColor(Color.grey);
-                bottomLeftBlueprint.gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+                bottomLeftBlueprint.DisableAssigning();
             }
-            if (!copyController.FindAcceptedShape(bottomRightBlueprint.GetShapeName() + "(Clone)"))
+            if (bottomRightBlueprint.isActiveAndEnabled &&
+                (bottomRightBlueprint.Locked || !copyController.FindAcceptedShape(bottomRightBlueprint.GetShapeName() + "(Clone)")))
             {
-                bottomRightBlueprint.ChangeColor(Color.grey);
-                bottomRightBlueprint.gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+                bottomRightBlueprint.DisableAssigning();
             }
         }
     }
 
-    private void UnlockUnassignableBlueprints()
+    private void EnableAssignableBlueprints()
     {
-        topLeftBlueprint.ChangeColor(tempTopLeftBlueprintColor);
-        topRightBlueprint.ChangeColor(temptopRightBlueprintColor);
-        bottomLeftBlueprint.ChangeColor(tempBottomLeftBlueprintColor);
-        bottomRightBlueprint.ChangeColor(tempBottomRightBlueprintColor);
-        topLeftBlueprint.gameObject.GetComponent<CircleCollider2D>().enabled = true;
-        topRightBlueprint.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-        bottomLeftBlueprint.gameObject.GetComponent<PolygonCollider2D>().enabled = true;
-        bottomRightBlueprint.gameObject.GetComponent<PolygonCollider2D>().enabled = true;
+        if (topLeftBlueprint.isActiveAndEnabled)
+            topLeftBlueprint.EnableAssigning();
+        if (topRightBlueprint.isActiveAndEnabled )
+            topRightBlueprint.EnableAssigning();
+        if (bottomLeftBlueprint.isActiveAndEnabled)
+            bottomLeftBlueprint.EnableAssigning();
+        if (bottomRightBlueprint.isActiveAndEnabled)
+            bottomRightBlueprint.EnableAssigning();
     }
 
     private bool IsBlueprintActivated(BlueprintController controller)
     {
-        return controller != null &&
-            controller.isActiveAndEnabled;
+        return controller != null && controller.isActiveAndEnabled;
     }
 }

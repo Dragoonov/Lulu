@@ -59,7 +59,7 @@ public class ShapeController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name != gameObject.name && collision.gameObject.name != "ColorHolder")
+        if(collision.gameObject.name != gameObject.name)
         {
             colorHolder.AddColorWithShape(currentColor,gameObject.name);
             colliding = true;
@@ -68,7 +68,7 @@ public class ShapeController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name != gameObject.name && collision.gameObject.name != "ColorHolder")
+        if (collision.gameObject.name != gameObject.name)
         {
             colorHolder.RemoveColorWithShape(currentColor, gameObject.name);
             colliding = false;

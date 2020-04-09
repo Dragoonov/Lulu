@@ -1,15 +1,70 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BlueprintController : MonoBehaviour
 {
     public GameObject shape;
-    private SpriteRenderer renderer;
-    // Start is called before the first frame update
+    public SpriteRenderer renderer;
+    private Color tempColor;
+    public GameObject lockObject;
+    public GameObject blockObject;
+
+    [SerializeField]
+    private bool _blocked;
+    public bool Blocked
+    {
+        get
+        {
+            return _blocked;
+        }
+        set
+        {
+            if (_blocked != value)
+            {
+                _blocked = value;
+                if (_blocked)
+                    Block();
+                else
+                    Unblock();
+            }
+        }
+    }
+
+    [SerializeField]
+    private bool _locked;
+    public bool Locked
+    {
+        get
+        {
+            return _locked;
+        }
+        set
+        {
+            if(_locked != value)
+            {
+                _locked = value;
+                if (_locked)
+                    Lock();
+                else
+                    Unlock();
+            }
+        }
+    }
+
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
+        tempColor = renderer.color;
+        blockObject = transform.Find("Block").gameObject;
+        lockObject = transform.Find("Lock").gameObject;
+        blockObject.SetActive(false);
+        lockObject.SetActive(false);
+        if (_locked)
+            Lock();
+        if (_blocked)
+            Block();
     }
 
     // Update is called once per frame
@@ -20,24 +75,55 @@ public class BlueprintController : MonoBehaviour
 
     public void CreateShape(Vector2 position)
     {
-        GameObject clone = Instantiate(shape, position, Quaternion.identity);
-        clone.GetComponent<SpriteRenderer>().color = renderer.color;
+        if(!Blocked)
+        {
+            GameObject clone = Instantiate(shape, position, Quaternion.identity);
+            clone.GetComponent<SpriteRenderer>().color = renderer.color;
+        }
     }
 
-    public void ChangeColor(Color color)
-    {
-        renderer.color = color;
-    }
 
     public string GetShapeName()
     {
         return shape.name;
     }
 
-    public Color GetColor()
+    public void DisableAssigning()
     {
-        return renderer.color;
+        tempColor = renderer.color;
+        renderer.color = Color.gray;
+        GetComponent<Collider2D>().enabled = false;
+    }
+
+    public void EnableAssigning()
+    {
+        if(!Blocked)
+        {
+            renderer.color = tempColor;
+            GetComponent<Collider2D>().enabled = true;
+        }
+    }
+
+    private void Lock()
+    {
+        lockObject.SetActive(true);
     }
 
 
+    private void Unlock()
+    {
+        lockObject.SetActive(false);
+    }
+
+    private void Block()
+    {
+        DisableAssigning();
+        blockObject.SetActive(true);
+    }
+
+    private void Unblock()
+    {
+        EnableAssigning();
+        blockObject.SetActive(false);
+    }
 }

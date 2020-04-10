@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\BlueprintController.cs" />
     <Compile Include="Assets\Scripts\ColorHolderController.cs" />
     <Compile Include="Assets\Scripts\ColorsController.cs" />
+    <Compile Include="Assets\Scripts\HelpController.cs" />
     <Compile Include="Assets\Scripts\ShapeController.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />

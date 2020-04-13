@@ -10,9 +10,24 @@ public class GameStateController : MonoBehaviour
     public Sprite square;
     public Sprite pentagon;
 
-    void Start()
+    AudioSource source;
+    public bool muted;
+
+    private static GameObject instance;
+
+    void Awake()
     {
-        
+        if(instance == null)
+        {
+            instance = this.gameObject;
+            source = GetComponent<AudioSource>();
+            muted = false;
+            DontDestroyOnLoad(instance);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -21,9 +36,10 @@ public class GameStateController : MonoBehaviour
         
     }
 
-    public void OpenLevesMenu()
+    public void PlayTapSound()
     {
-        SceneManager.LoadScene("LevelsMenu");
-    }
+        if (!muted)
+            source.Play();
+    }    
 
 }

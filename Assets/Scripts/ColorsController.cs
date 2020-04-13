@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ColorsController : MonoBehaviour
 {
+
+    private const int GOAL_SCALE = 30;
+
     public BlueprintController topLeftBlueprint;
     public BlueprintController topRightBlueprint;
     public BlueprintController bottomLeftBlueprint;
     public BlueprintController bottomRightBlueprint;
     public GameObject helpModal;
+    public GameObject finishModal;
+    public Image goal;
 
     GameObject holderCopy;
     public bool paused;
@@ -23,6 +29,7 @@ public class ColorsController : MonoBehaviour
     {
         if (!paused)
         {
+            CheckIfGoalMatched();
             foreach (Touch touch in Input.touches)
             {
 
@@ -85,6 +92,19 @@ public class ColorsController : MonoBehaviour
         }
     }
 
+    private void CheckIfGoalMatched()
+    {
+        GameObject finalGoal = GameObject.Find(goal.sprite.name + "(Clone)");
+        if(finalGoal != null)
+        {
+            if(finalGoal.GetComponent<SpriteRenderer>().color == goal.color && finalGoal.transform.localScale.x >= GOAL_SCALE)
+            {
+                Pause();
+                OpenFinishModal();
+            }
+        }
+    }
+
     private void DisableAssignableBlueprints()
     {
         if(holderCopy != null)
@@ -135,6 +155,11 @@ public class ColorsController : MonoBehaviour
         helpModal.SetActive(true);
         helpModal.GetComponent<HelpController>().Initialize();
         paused = true;
+    }
+
+    public void OpenFinishModal()
+    {
+        finishModal.SetActive(true);
     }
 
     public void Close()

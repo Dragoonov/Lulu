@@ -9,6 +9,12 @@ public class LevelChooserController : MonoBehaviour
     GameStateController controller;
     GameObject objUnmute;
     GameObject objMute;
+
+    public Sprite triangle;
+    public Sprite circle;
+    public Sprite square;
+    public Sprite pentagon;
+
     private void Start()
     {
         controller = GameObject.Find("GameStateController").GetComponent<GameStateController>();
@@ -27,6 +33,8 @@ public class LevelChooserController : MonoBehaviour
             //LevelDataHolder.setBottomLeftBlueprint(EffectType.DISABLE);
             //LevelDataHolder.setBottomRightBlueprint(EffectType.BLOCK, triangle, Color.cyan);
             //LevelDataHolder.setTopRightBlueprint(EffectType.LOCK, pentagon, Color.green);
+            LevelDataHolder.SetTopLeftBlueprint(Color.white);
+            LevelDataHolder.SetGoal(circle, Color.white);
             SceneManager.LoadScene("MainScene");
             controller.PlayTapSound();
         }

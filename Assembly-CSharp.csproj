@@ -67,7 +67,10 @@
     <Compile Include="Assets\Scripts\BlueprintController.cs" />
     <Compile Include="Assets\Scripts\ColorHolderController.cs" />
     <Compile Include="Assets\Scripts\ColorsController.cs" />
+    <Compile Include="Assets\Scripts\GameStateController.cs" />
     <Compile Include="Assets\Scripts\HelpController.cs" />
+    <Compile Include="Assets\Scripts\LevelChooserController.cs" />
+    <Compile Include="Assets\Scripts\LevelDataHolder.cs" />
     <Compile Include="Assets\Scripts\LockController.cs" />
     <Compile Include="Assets\Scripts\ShapeController.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

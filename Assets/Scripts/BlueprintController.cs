@@ -53,12 +53,16 @@ public class BlueprintController : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Awake()
     {
-        renderer = GetComponent<SpriteRenderer>();
-        tempColor = renderer.color;
         blockObject = transform.Find("Block").gameObject;
         lockObject = transform.Find("Lock").gameObject;
+        renderer = GetComponent<SpriteRenderer>();
+    }
+
+    void Start()
+    {
+        tempColor = renderer.color;
         blockObject.SetActive(false);
         lockObject.SetActive(false);
         if (_locked)
@@ -125,5 +129,17 @@ public class BlueprintController : MonoBehaviour
     {
         EnableAssigning();
         blockObject.SetActive(false);
+    }
+
+    public void Lock(Sprite sprite, Color color)
+    {
+        Locked = true;
+        lockObject.GetComponent<LockController>().SetShape(sprite, color);
+    }
+
+    public void Block(Sprite sprite, Color color)
+    {
+        Blocked = true;
+        blockObject.GetComponent<BlockController>().SetShape(sprite, color);
     }
 }

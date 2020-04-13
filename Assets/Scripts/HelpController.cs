@@ -21,6 +21,11 @@ public class HelpController : MonoBehaviour
             GameObject result = helper.transform.GetChild(2).gameObject;
             Color color1 = FindColorForTint(tint1);
             Color color2 = FindColorForTint(tint2);
+            if(color1 == Color.black || color2 == Color.black)
+            {
+                helper.SetActive(false);
+                continue;
+            }
             tint1.GetComponent<Image>().color = color1;
             tint2.GetComponent<Image>().color = color2;
             result.GetComponent<Image>().color = MixColors(color1, color2);
@@ -37,7 +42,10 @@ public class HelpController : MonoBehaviour
     private Color FindColorForTint(GameObject tint)
     {
         string tintName = tint.name.Substring(0, tint.name.Length - 4);
-        return GameObject.Find(tintName + "Blueprint").GetComponent<SpriteRenderer>().color;
+        GameObject bluePrint = GameObject.Find(tintName + "Blueprint");
+        if (bluePrint == null)
+            return Color.black;
+        return bluePrint.GetComponent<SpriteRenderer>().color;
     }
 
     private Color MixColors(Color color1, Color color2)

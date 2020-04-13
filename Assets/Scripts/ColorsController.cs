@@ -13,6 +13,11 @@ public class ColorsController : MonoBehaviour
     GameObject holderCopy;
     public bool paused;
 
+    private void Start()
+    {
+        LevelDataHolder.InjectData(this);
+    }
+
     // Update is called once per frame
     void Update()
     {

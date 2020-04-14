@@ -5,13 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class GameStateController : MonoBehaviour
 {
-    public Sprite triangle;
-    public Sprite circle;
-    public Sprite square;
-    public Sprite pentagon;
 
     AudioSource source;
     public bool muted;
+    private const string LAST_LEVEL_KEY = "last_level";
+    public int LastLevel
+    {
+        get
+        {
+           return GetLastLevel();
+        }
+        set
+        {
+            SaveLastLevel(value);
+        }
+    }
 
     private static GameObject instance;
 
@@ -40,6 +48,21 @@ public class GameStateController : MonoBehaviour
     {
         if (!muted)
             source.Play();
-    }    
+    }
+
+    public void ClearUserData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
+    private void SaveLastLevel(int level)
+    {
+        PlayerPrefs.SetInt(LAST_LEVEL_KEY, level);
+    }
+
+    private int GetLastLevel()
+    {
+        return PlayerPrefs.GetInt(LAST_LEVEL_KEY,1);
+    }
 
 }

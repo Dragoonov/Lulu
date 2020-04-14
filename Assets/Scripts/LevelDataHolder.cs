@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public enum EffectType { BLOCK, LOCK, DISABLE, NONE }
@@ -10,6 +11,9 @@ public class LevelDataHolder
     static BlueprintData bottomLeftBlueprint;
     static BlueprintData bottomRightBlueprint;
     static GoalData goal;
+    static int level;
+
+
     public static void SetGoal(Sprite sprite, Color color)
     {
         goal = new GoalData
@@ -40,6 +44,11 @@ public class LevelDataHolder
         };
     }
 
+    internal static void SetLevel(int lev)
+    {
+        level = lev;
+    }
+
     public static void SetBottomLeftBlueprint(Color colorOwn = new Color(), EffectType effect = EffectType.NONE, Sprite sprite = null, Color color = new Color())
     {
         bottomLeftBlueprint = new BlueprintData
@@ -62,6 +71,7 @@ public class LevelDataHolder
 
     public static void InjectData(ColorsController controller)
     {
+        controller.level = level;
         if(goal != null)
         {
             controller.goal.color = goal.color;

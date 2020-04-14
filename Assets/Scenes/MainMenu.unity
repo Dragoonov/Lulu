@@ -314,10 +314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0251d84f6f5f841c2a5a7242bd4b5795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triangle: {fileID: 21300000, guid: cc13bc07a6dae784f9e97fdb59a70280, type: 3}
-  circle: {fileID: 21300000, guid: b3bd4d959d220ca40a506a13874fed10, type: 3}
-  square: {fileID: 21300000, guid: 4e445ae50e6799741ae1b92ff5b2d85a, type: 3}
-  pentagon: {fileID: 21300000, guid: 45130aa47e198b949890f394eb6eebc8, type: 3}
   muted: 0
 --- !u!82 &1969585784
 AudioSource:
@@ -502,6 +498,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1480721186468818065, guid: c58d71069c1da784ead62c08b8bb279f,
+        type: 3}
+      propertyPath: circle
+      value: 
+      objectReference: {fileID: 21300000, guid: b3bd4d959d220ca40a506a13874fed10,
+        type: 3}
+    - target: {fileID: 1480721186468818065, guid: c58d71069c1da784ead62c08b8bb279f,
+        type: 3}
+      propertyPath: pentagon
+      value: 
+      objectReference: {fileID: 21300000, guid: 45130aa47e198b949890f394eb6eebc8,
+        type: 3}
+    - target: {fileID: 1480721186468818065, guid: c58d71069c1da784ead62c08b8bb279f,
+        type: 3}
+      propertyPath: square
+      value: 
+      objectReference: {fileID: 21300000, guid: 4e445ae50e6799741ae1b92ff5b2d85a,
+        type: 3}
+    - target: {fileID: 1480721186468818065, guid: c58d71069c1da784ead62c08b8bb279f,
+        type: 3}
+      propertyPath: triangle
+      value: 
+      objectReference: {fileID: 21300000, guid: cc13bc07a6dae784f9e97fdb59a70280,
+        type: 3}
     - target: {fileID: 2551191952244453419, guid: c58d71069c1da784ead62c08b8bb279f,
         type: 3}
       propertyPath: m_textInfo.characterCount

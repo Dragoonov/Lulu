@@ -8,6 +8,8 @@ public class ColorsController : MonoBehaviour
 
     private const int GOAL_SCALE = 30;
 
+    GameStateController stateController;
+
     public BlueprintController topLeftBlueprint;
     public BlueprintController topRightBlueprint;
     public BlueprintController bottomLeftBlueprint;
@@ -15,13 +17,23 @@ public class ColorsController : MonoBehaviour
     public GameObject helpModal;
     public GameObject finishModal;
     public Image goal;
+    public int level;
 
     GameObject holderCopy;
     public bool paused;
 
+    private void Awake()
+    {
+        stateController = GameObject.Find("GameStateController").GetComponent<GameStateController>();
+    }
+
     private void Start()
     {
         LevelDataHolder.InjectData(this);
+        if(level > stateController.LastLevel)
+        {
+            stateController.LastLevel = level;
+        }
     }
 
     // Update is called once per frame

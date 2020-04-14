@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelChooserController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     GameStateController controller;
     GameObject objUnmute;
     GameObject objMute;
@@ -33,6 +33,7 @@ public class LevelChooserController : MonoBehaviour
             //LevelDataHolder.setBottomLeftBlueprint(EffectType.DISABLE);
             //LevelDataHolder.setBottomRightBlueprint(EffectType.BLOCK, triangle, Color.cyan);
             //LevelDataHolder.setTopRightBlueprint(EffectType.LOCK, pentagon, Color.green);
+            LevelDataHolder.SetLevel(level);
             LevelDataHolder.SetTopLeftBlueprint(Color.white);
             LevelDataHolder.SetGoal(circle, Color.white);
             SceneManager.LoadScene("MainScene");
@@ -69,5 +70,11 @@ public class LevelChooserController : MonoBehaviour
     {
         controller.PlayTapSound();
         Application.Quit();
+    }
+
+    public void StartGame()
+    {
+        int lastLevel = controller.LastLevel;
+        StartLevel(lastLevel);
     }
 }

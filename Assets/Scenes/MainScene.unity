@@ -1951,6 +1951,7 @@ MonoBehaviour:
   helpModal: {fileID: 2137773498}
   finishModal: {fileID: 1979915300}
   goal: {fileID: 833532419}
+  level: 0
   paused: 0
 --- !u!4 &982474398
 Transform:

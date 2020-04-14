@@ -103,9 +103,9 @@ public class BlueprintController : MonoBehaviour
     {
         if(!Blocked)
         {
-            renderer.color = tempColor;
             GetComponent<Collider2D>().enabled = true;
         }
+        renderer.color = tempColor;
     }
 
     private void Lock()
@@ -121,13 +121,13 @@ public class BlueprintController : MonoBehaviour
 
     private void Block()
     {
-        DisableAssigning();
+        GetComponent<Collider2D>().enabled = false;
         blockObject.SetActive(true);
     }
 
     private void Unblock()
     {
-        EnableAssigning();
+        GetComponent<Collider2D>().enabled = true;
         blockObject.SetActive(false);
     }
 

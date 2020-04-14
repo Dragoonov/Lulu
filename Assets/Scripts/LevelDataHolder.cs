@@ -38,6 +38,7 @@ public class LevelDataHolder
     {
         topRightBlueprint = new BlueprintData
         {
+            color = colorOwn,
             effect = effect,
             sprite = sprite,
             conditionColor = color,
@@ -53,6 +54,7 @@ public class LevelDataHolder
     {
         bottomLeftBlueprint = new BlueprintData
         {
+            color = colorOwn,
             effect = effect,
             sprite = sprite,
             conditionColor = color,
@@ -63,10 +65,28 @@ public class LevelDataHolder
     {
         bottomRightBlueprint = new BlueprintData
         {
+            color = colorOwn,
             effect = effect,
             sprite = sprite,
             conditionColor = color,
         };
+    }
+
+    private static void InjectToBlueprint(BlueprintController controller, BlueprintData data)
+    {
+        if (data != null)
+        {
+            if (data.effect == EffectType.DISABLE)
+                controller.gameObject.SetActive(false);
+            else
+            {
+                controller.gameObject.GetComponent<SpriteRenderer>().color = data.color;
+                if (data.effect == EffectType.BLOCK)
+                    controller.Block(data.sprite, data.conditionColor);
+                if (data.effect == EffectType.LOCK)
+                    controller.Lock(data.sprite, data.conditionColor);
+            }
+        }
     }
 
     public static void InjectData(ColorsController controller)
@@ -77,62 +97,10 @@ public class LevelDataHolder
             controller.goal.color = goal.color;
             controller.goal.sprite = goal.sprite;
         }
-        if(topLeftBlueprint != null)
-        {
-            if (topLeftBlueprint.effect == EffectType.DISABLE)
-                controller.topLeftBlueprint.gameObject.SetActive(false);
-            else
-            {
-                controller.topLeftBlueprint.gameObject.GetComponent<SpriteRenderer>().color = topLeftBlueprint.color;
-                if (topLeftBlueprint.effect == EffectType.BLOCK)
-                    controller.topLeftBlueprint.Block(topLeftBlueprint.sprite, topLeftBlueprint.conditionColor);
-                if (topLeftBlueprint.effect == EffectType.LOCK)
-                    controller.topLeftBlueprint.Lock(topLeftBlueprint.sprite, topLeftBlueprint.conditionColor);
-            }
-        }
-
-        if (topRightBlueprint != null)
-        {
-            if (topRightBlueprint.effect == EffectType.DISABLE)
-                controller.topRightBlueprint.gameObject.SetActive(false);
-            else
-            {
-                controller.topRightBlueprint.gameObject.GetComponent<SpriteRenderer>().color = topRightBlueprint.color;
-                if (topRightBlueprint.effect == EffectType.BLOCK)
-                    controller.topRightBlueprint.Block(topRightBlueprint.sprite, topRightBlueprint.conditionColor);
-                if (topRightBlueprint.effect == EffectType.LOCK)
-                    controller.topRightBlueprint.Lock(topRightBlueprint.sprite, topRightBlueprint.conditionColor);
-            }
-        }
-
-        if (bottomLeftBlueprint != null)
-        {
-            if (bottomLeftBlueprint.effect == EffectType.DISABLE)
-                controller.bottomLeftBlueprint.gameObject.SetActive(false);
-            else
-            {
-                controller.bottomLeftBlueprint.gameObject.GetComponent<SpriteRenderer>().color = bottomLeftBlueprint.color;
-                if (bottomLeftBlueprint.effect == EffectType.BLOCK)
-                    controller.bottomLeftBlueprint.Block(bottomLeftBlueprint.sprite, bottomLeftBlueprint.conditionColor);
-                if (bottomLeftBlueprint.effect == EffectType.LOCK)
-                    controller.bottomLeftBlueprint.Lock(bottomLeftBlueprint.sprite, bottomLeftBlueprint.conditionColor);
-            }
-        }
-
-        if (bottomRightBlueprint != null)
-        {
-            if (bottomRightBlueprint.effect == EffectType.DISABLE)
-                controller.bottomRightBlueprint.gameObject.SetActive(false);
-            else
-            {
-                controller.bottomRightBlueprint.gameObject.GetComponent<SpriteRenderer>().color = bottomRightBlueprint.color;
-                if (bottomRightBlueprint.effect == EffectType.BLOCK)
-                    controller.bottomRightBlueprint.Block(bottomRightBlueprint.sprite, bottomRightBlueprint.conditionColor);
-                if (bottomRightBlueprint.effect == EffectType.LOCK)
-                    controller.bottomRightBlueprint.Lock(bottomRightBlueprint.sprite, bottomRightBlueprint.conditionColor);
-            }
-        }
-
+        InjectToBlueprint(controller.topLeftBlueprint, topLeftBlueprint);
+        InjectToBlueprint(controller.topRightBlueprint, topRightBlueprint);
+        InjectToBlueprint(controller.bottomLeftBlueprint, bottomLeftBlueprint);
+        InjectToBlueprint(controller.bottomRightBlueprint, bottomRightBlueprint);
         ClearData();
     }
 

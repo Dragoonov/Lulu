@@ -34,8 +34,18 @@ public class LevelChooserController : MonoBehaviour
             //LevelDataHolder.setBottomRightBlueprint(EffectType.BLOCK, triangle, Color.cyan);
             //LevelDataHolder.setTopRightBlueprint(EffectType.LOCK, pentagon, Color.green);
             LevelDataHolder.SetLevel(level);
-            LevelDataHolder.SetTopLeftBlueprint(Color.white);
+            LevelDataHolder.SetTopLeftBlueprint(Color.green);
             LevelDataHolder.SetGoal(circle, Color.white);
+            SceneManager.LoadScene("MainScene");
+            controller.PlayTapSound();
+        }
+        if (level == 2)
+        {
+            LevelDataHolder.SetLevel(level);
+            LevelDataHolder.SetTopLeftBlueprint(Color.red,EffectType.LOCK,square,Color.green);
+            LevelDataHolder.SetTopRightBlueprint(Color.green, EffectType.BLOCK, triangle, Color.yellow);
+            LevelDataHolder.SetBottomLeftBlueprint(Color.yellow);
+            LevelDataHolder.SetGoal(circle, (Color.red + Color.green)/2);
             SceneManager.LoadScene("MainScene");
             controller.PlayTapSound();
         }
@@ -52,6 +62,7 @@ public class LevelChooserController : MonoBehaviour
         controller.muted = !controller.muted;
         objUnmute.SetActive(!controller.muted);
         objMute.SetActive(controller.muted);
+        controller.PlayTapSound();
     }    
 
     public void StartLevelsMenu()
@@ -76,5 +87,6 @@ public class LevelChooserController : MonoBehaviour
     {
         int lastLevel = controller.LastLevel;
         StartLevel(lastLevel);
+        controller.PlayTapSound();
     }
 }

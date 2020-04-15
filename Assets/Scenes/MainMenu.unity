@@ -547,6 +547,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuBackground
       objectReference: {fileID: 0}
+    - target: {fileID: 6437025759093040748, guid: c58d71069c1da784ead62c08b8bb279f,
+        type: 3}
+      propertyPath: m_Colors.m_ColorMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7196072667168311993, guid: c58d71069c1da784ead62c08b8bb279f,
         type: 3}
       propertyPath: m_textInfo.characterCount

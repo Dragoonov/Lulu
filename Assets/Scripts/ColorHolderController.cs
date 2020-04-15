@@ -9,6 +9,7 @@ public class ColorHolderController : MonoBehaviour
     List<Color> colors;
     public HashSet<string> assignableShapes;
     public bool isDragging;
+    private Color defaultColor;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class ColorHolderController : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         Debug.Log(renderer);
         colors = new List<Color>();
+        defaultColor = renderer.color;
     }
 
     void Update()
@@ -64,7 +66,7 @@ public class ColorHolderController : MonoBehaviour
             renderer.color = color;
         }
         else
-            renderer.color = Color.white;
+            renderer.color = defaultColor;
     }
 
     private Color ProduceNewColor(Color color1, Color color2)

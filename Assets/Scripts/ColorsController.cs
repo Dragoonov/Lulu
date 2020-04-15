@@ -164,6 +164,7 @@ public class ColorsController : MonoBehaviour
 
     public void Open()
     {
+        stateController.PlayTapSound();
         helpModal.SetActive(true);
         helpModal.GetComponent<HelpController>().Initialize();
         paused = true;
@@ -176,6 +177,7 @@ public class ColorsController : MonoBehaviour
 
     public void Close()
     {
+        stateController.PlayTapSound();
         helpModal.SetActive(false);
         paused = false;
     }

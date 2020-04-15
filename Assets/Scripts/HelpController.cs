@@ -15,7 +15,7 @@ public class HelpController : MonoBehaviour
     {
         for (int i = 0; i < 6; i++)
         {
-            GameObject helper = transform.Find("Helper" + i).gameObject;
+            GameObject helper = transform.Find("Helper" + i).transform.GetChild(0).gameObject;
             GameObject tint1 = helper.transform.GetChild(0).gameObject;
             GameObject tint2 = helper.transform.GetChild(1).gameObject;
             GameObject result = helper.transform.GetChild(2).gameObject;

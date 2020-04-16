@@ -328,10 +328,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68fa943db582f4bdf886f8f1bb8b1cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triangle: {fileID: 0}
-  circle: {fileID: 0}
-  square: {fileID: 0}
-  pentagon: {fileID: 0}
+  triangle: {fileID: 21300000, guid: cc13bc07a6dae784f9e97fdb59a70280, type: 3}
+  circle: {fileID: 21300000, guid: b3bd4d959d220ca40a506a13874fed10, type: 3}
+  square: {fileID: 21300000, guid: 4e445ae50e6799741ae1b92ff5b2d85a, type: 3}
+  pentagon: {fileID: 21300000, guid: 45130aa47e198b949890f394eb6eebc8, type: 3}
 --- !u!1 &3208649901774982499
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}

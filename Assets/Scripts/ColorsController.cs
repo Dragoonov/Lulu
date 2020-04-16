@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ColorsController : MonoBehaviour
 {
 
-    private const int GOAL_SCALE = 30;
+    private const int GOAL_SCALE = 50;
 
     GameStateController stateController;
 
@@ -42,64 +41,46 @@ public class ColorsController : MonoBehaviour
         if (!paused)
         {
             CheckIfGoalMatched();
-            foreach (Touch touch in Input.touches)
-            {
+           // HandleTouch();
+            HandleMouse();
+        }
+    }
 
-            }
-            if (Input.GetMouseButtonDown(0))
+    private void HandleTouch()
+    {
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Began)
             {
-                Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                Vector2 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-                RaycastHit2D hit = Physics2D.Raycast(objPosition, Vector2.zero);
-                if (hit.collider != null && hit.collider.gameObject.name == "ColorHolder")
-                {
-                    holderCopy = Instantiate(hit.collider.gameObject, new Vector3(objPosition.x, objPosition.y, 5f), Quaternion.identity);
-                    holderCopy.gameObject.transform.localScale = new Vector3(10, 10, 10);
-                    ColorHolderController copyController = holderCopy.GetComponent<ColorHolderController>();
-                    copyController.isDragging = true;
-                    copyController.assignableShapes =
-                        new HashSet<string>(GameObject.Find("ColorHolder").GetComponent<ColorHolderController>().assignableShapes);
-                    DisableAssignableBlueprints();
-                }
-                else if (hit.collider == null || hit.collider.gameObject.name.Contains("Clone"))
-                {
-                    if (objPosition.x < 0 && objPosition.y > 0 && IsBlueprintActivated(topLeftBlueprint))
-                    {
-                        topLeftBlueprint.CreateShape(objPosition);
-                    }
-                    else if (objPosition.x > 0 && objPosition.y > 0 && IsBlueprintActivated(topRightBlueprint))
-                    {
-                        topRightBlueprint.CreateShape(objPosition);
-                    }
-                    else if (objPosition.x < 0 && objPosition.y < 0 && IsBlueprintActivated(bottomLeftBlueprint))
-                    {
-                        bottomLeftBlueprint.CreateShape(objPosition);
-                    }
-                    else if (objPosition.x > 0 && objPosition.y < 0 && IsBlueprintActivated(bottomRightBlueprint))
-                    {
-                        bottomRightBlueprint.CreateShape(objPosition);
-                    }
-                }
+                Vector2 objPosition = Camera.main.ScreenToWorldPoint(touch.position);
+                HandleInputDown(objPosition, touch.fingerId);
             }
-            if (Input.GetMouseButtonUp(0))
+            if (touch.phase == TouchPhase.Ended)
             {
                 if (holderCopy != null)
                 {
-                    Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                    Vector2 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-                    Color holderColor = holderCopy.GetComponent<SpriteRenderer>().color;
-                    RaycastHit2D hit = Physics2D.Raycast(objPosition, Vector3.back, 10f);
-                    Debug.Log("Hit: " + hit.collider.gameObject + ", started on position: " + objPosition);
-                    if (hit.collider != null)
-                    {
-                        EnableAssignableBlueprints();
-                        GameObject obj = hit.collider.gameObject;
-                        Debug.Log(holderCopy.GetComponent<ColorHolderController>().assignableShapes.Count);
-                        obj.GetComponent<SpriteRenderer>().color = holderColor;
-                        Destroy(holderCopy);
-                        holderCopy = null;
-                    }
+                    Vector2 objPosition = Camera.main.ScreenToWorldPoint(touch.position);
+                    HandleInputUp(objPosition);
                 }
+            }
+        }
+    }
+
+    private void HandleMouse()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            HandleInputDown(objPosition);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (holderCopy != null)
+            {
+                Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                Vector2 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                HandleInputUp(objPosition);
             }
         }
     }
@@ -114,6 +95,56 @@ public class ColorsController : MonoBehaviour
                 Pause();
                 OpenFinishModal();
             }
+        }
+    }
+
+    private void HandleInputDown(Vector2 objPosition, int fingerId = 0)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(objPosition, Vector2.zero);
+        if (hit.collider != null && hit.collider.gameObject.name == "ColorHolder")
+        {
+            holderCopy = Instantiate(hit.collider.gameObject, new Vector3(objPosition.x, objPosition.y, 5f), Quaternion.identity);
+            holderCopy.gameObject.transform.localScale = new Vector3(10, 10, 10);
+            ColorHolderController copyController = holderCopy.GetComponent<ColorHolderController>();
+            copyController.isDragging = true;
+            copyController.assignableShapes =
+                new HashSet<string>(GameObject.Find("ColorHolder").GetComponent<ColorHolderController>().assignableShapes);
+            DisableAssignableBlueprints();
+        }
+        else if (hit.collider == null || hit.collider.gameObject.name.Contains("Clone"))
+        {
+            if (objPosition.x < 0 && objPosition.y > 0 && IsBlueprintActivated(topLeftBlueprint))
+            {
+                topLeftBlueprint.CreateShape(objPosition, fingerId);
+            }
+            else if (objPosition.x > 0 && objPosition.y > 0 && IsBlueprintActivated(topRightBlueprint))
+            {
+                topRightBlueprint.CreateShape(objPosition, fingerId);
+            }
+            else if (objPosition.x < 0 && objPosition.y < 0 && IsBlueprintActivated(bottomLeftBlueprint))
+            {
+                bottomLeftBlueprint.CreateShape(objPosition, fingerId);
+            }
+            else if (objPosition.x > 0 && objPosition.y < 0 && IsBlueprintActivated(bottomRightBlueprint))
+            {
+                bottomRightBlueprint.CreateShape(objPosition, fingerId);
+            }
+        }
+    }
+
+    private void HandleInputUp(Vector2 objPosition)
+    {
+        Color holderColor = holderCopy.GetComponent<SpriteRenderer>().color;
+        RaycastHit2D hit = Physics2D.Raycast(objPosition, Vector3.back, 10f);
+        Debug.Log("Hit: " + hit.collider.gameObject + ", started on position: " + objPosition);
+        if (hit.collider != null)
+        {
+            EnableAssignableBlueprints();
+            GameObject obj = hit.collider.gameObject;
+            Debug.Log(holderCopy.GetComponent<ColorHolderController>().assignableShapes.Count);
+            obj.GetComponent<SpriteRenderer>().color = holderColor;
+            Destroy(holderCopy);
+            holderCopy = null;
         }
     }
 
@@ -172,6 +203,7 @@ public class ColorsController : MonoBehaviour
 
     public void OpenFinishModal()
     {
+        paused = true;
         finishModal.SetActive(true);
     }
 

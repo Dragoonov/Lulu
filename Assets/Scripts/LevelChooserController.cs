@@ -15,6 +15,8 @@ public class LevelChooserController : MonoBehaviour
     public Sprite square;
     public Sprite pentagon;
 
+    int currentLevel;
+
     private void Start()
     {
         controller = GameObject.Find("GameStateController").GetComponent<GameStateController>();
@@ -24,6 +26,11 @@ public class LevelChooserController : MonoBehaviour
         {
             objUnmute.SetActive(!controller.muted);
             objMute.SetActive(controller.muted);
+        }
+        ColorsController colorsController = GetComponent<ColorsController>();
+        if(colorsController != null)
+        {
+            currentLevel = colorsController.level;
         }
     }
     public void StartLevel(int level)
@@ -37,7 +44,6 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetTopLeftBlueprint(Color.green);
             LevelDataHolder.SetGoal(circle, Color.white);
             SceneManager.LoadScene("MainScene");
-            controller.PlayTapSound();
         }
         if (level == 2)
         {
@@ -47,8 +53,13 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetBottomLeftBlueprint(Color.yellow);
             LevelDataHolder.SetGoal(circle, (Color.red + Color.green)/2);
             SceneManager.LoadScene("MainScene");
-            controller.PlayTapSound();
         }
+        controller.PlayTapSound();
+    }
+
+    public void RestartLevel()
+    {
+        StartLevel(currentLevel);
     }
 
     public void StartMainMenu()

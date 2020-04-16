@@ -77,12 +77,13 @@ public class BlueprintController : MonoBehaviour
         
     }
 
-    public void CreateShape(Vector2 position)
+    public void CreateShape(Vector2 position, int fingerId)
     {
         if(!Blocked)
         {
             GameObject clone = Instantiate(shape, position, Quaternion.identity);
             clone.GetComponent<SpriteRenderer>().color = renderer.color;
+            clone.GetComponent<ShapeController>().fingerId = fingerId;
         }
     }
 

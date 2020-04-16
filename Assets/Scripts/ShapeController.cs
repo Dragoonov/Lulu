@@ -11,6 +11,7 @@ public class ShapeController : MonoBehaviour
     Color currentColor;
     private ColorHolderController colorHolder;
     private bool colliding;
+    public int fingerId;
 
     void Start()
     {
@@ -23,6 +24,29 @@ public class ShapeController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        //HandleTouch();
+        HandleMouse();
+    }
+
+    private void HandleTouch()
+    {
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.fingerId == fingerId && touch.phase == TouchPhase.Ended && rising)
+            {
+                rising = false;
+            }
+            if (rising && touch.fingerId == fingerId && touch.phase != TouchPhase.Ended)
+            {
+                Expand();
+            }
+            else
+                Shrink();
+        }
+    }
+
+    private void HandleMouse()
     {
         if (Input.GetMouseButtonUp(0))
             rising = false;

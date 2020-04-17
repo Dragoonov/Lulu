@@ -10,6 +10,7 @@ public class BlueprintController : MonoBehaviour
     private Color tempColor;
     public GameObject lockObject;
     public GameObject blockObject;
+    private const int POSITION_OFFSET_PIXEL = 100;
 
     [SerializeField]
     private bool _blocked;
@@ -62,6 +63,7 @@ public class BlueprintController : MonoBehaviour
 
     void Start()
     {
+        SetPositionViewport();
         tempColor = renderer.color;
         blockObject.SetActive(false);
         lockObject.SetActive(false);
@@ -75,6 +77,62 @@ public class BlueprintController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void SetPositionPixel()
+    {
+        if(shape.name == "triangle")
+        {
+            transform.position = Camera.main.ScreenToWorldPoint(
+                new Vector3(POSITION_OFFSET_PIXEL, POSITION_OFFSET_PIXEL, 10));
+        }
+        if (shape.name == "circle")
+        {
+            transform.position = Camera.main.ScreenToWorldPoint(
+                new Vector3(POSITION_OFFSET_PIXEL, Camera.main.pixelHeight - POSITION_OFFSET_PIXEL, 10));
+        }
+        if (shape.name == "square")
+        {
+            transform.position = Camera.main.ScreenToWorldPoint(
+                new Vector3(Camera.main.pixelWidth - POSITION_OFFSET_PIXEL, Camera.main.pixelHeight - POSITION_OFFSET_PIXEL, 10));
+        }
+        if (shape.name == "pentagon")
+        {
+            transform.position = Camera.main.ScreenToWorldPoint(
+                new Vector3(Camera.main.pixelWidth - POSITION_OFFSET_PIXEL, POSITION_OFFSET_PIXEL, 10));
+        }
+    }
+
+    private void SetPositionViewport()
+    {
+        Vector2 savebotttomLeftOffset = Camera.main.ScreenToViewportPoint(new Vector2(Screen.safeArea.x, Screen.safeArea.y));
+        Vector2 saveBottomRightOffset = Camera.main.ScreenToViewportPoint(
+            new Vector2(Camera.main.pixelWidth-Screen.safeArea.width, Screen.safeArea.y));
+        Vector2 savetopLeftOffset = Camera.main.ScreenToViewportPoint(
+            new Vector2(Screen.safeArea.x, Camera.main.pixelHeight - Screen.safeArea.height));
+        Vector2 savetopRightOffset = Camera.main.ScreenToViewportPoint(
+            new Vector2(Camera.main.pixelWidth-Screen.safeArea.width, Camera.main.pixelHeight - Screen.safeArea.height));
+
+        if (shape.name == "triangle")
+        {
+            transform.position = Camera.main.ViewportToWorldPoint(
+                new Vector3(0.1f+savebotttomLeftOffset.x, 0.05f + savebotttomLeftOffset.y, 10));
+        }
+        if (shape.name == "circle")
+        {
+            transform.position = Camera.main.ViewportToWorldPoint(
+                new Vector3(0.1f + savetopLeftOffset.x, 0.95f - savetopLeftOffset.y, 10));
+        }
+        if (shape.name == "square")
+        {
+            transform.position = Camera.main.ViewportToWorldPoint(
+                new Vector3(0.9f - savetopRightOffset.x, 0.95f - savetopRightOffset.y, 10));
+        }
+        if (shape.name == "pentagon")
+        {
+            transform.position = Camera.main.ViewportToWorldPoint(
+                new Vector3(0.9f - saveBottomRightOffset.x, 0.05f + saveBottomRightOffset.y, 10));
+        }
     }
 
     public void CreateShape(Vector2 position, int fingerId)

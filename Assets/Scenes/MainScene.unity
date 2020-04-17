@@ -2472,7 +2472,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -3, y: 628}
+  m_AnchoredPosition: {x: -3, y: 612}
   m_SizeDelta: {x: 690, y: 794}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1274948813
@@ -5423,7 +5423,7 @@ PrefabInstance:
     - target: {fileID: 5604548393345837910, guid: d24c9b43f4ed5415d8dd8cbdaa4bad4d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: -2.2
       objectReference: {fileID: 0}
     - target: {fileID: 5604548393345837910, guid: d24c9b43f4ed5415d8dd8cbdaa4bad4d,
         type: 3}
@@ -5694,7 +5694,7 @@ PrefabInstance:
     - target: {fileID: 5990549442373461966, guid: 693449b42147a40738e1baf69e3a343e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 5990549442373461966, guid: 693449b42147a40738e1baf69e3a343e,
         type: 3}
@@ -5758,7 +5758,7 @@ PrefabInstance:
     - target: {fileID: 5252381741798193136, guid: 13e6e6b31ce1a49b1890fcf7e86ce996,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: -2.2
       objectReference: {fileID: 0}
     - target: {fileID: 5252381741798193136, guid: 13e6e6b31ce1a49b1890fcf7e86ce996,
         type: 3}
@@ -5815,6 +5815,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BottomLeftBlueprint
       objectReference: {fileID: 0}
+    - target: {fileID: 7727894242299034253, guid: 13e6e6b31ce1a49b1890fcf7e86ce996,
+        type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13e6e6b31ce1a49b1890fcf7e86ce996, type: 3}
 --- !u!1001 &8465398080585905774
@@ -5827,7 +5832,7 @@ PrefabInstance:
     - target: {fileID: 3837824089109804431, guid: 29f9ec1b9085e404e977e82d2018798f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 3837824089109804431, guid: 29f9ec1b9085e404e977e82d2018798f,
         type: 3}

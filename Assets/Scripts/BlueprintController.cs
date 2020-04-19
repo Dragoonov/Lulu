@@ -7,7 +7,7 @@ public class BlueprintController : MonoBehaviour
 {
     public GameObject shape;
     public SpriteRenderer renderer;
-    private Color tempColor;
+    public Color tempColor;
     public GameObject lockObject;
     public GameObject blockObject;
     private const int POSITION_OFFSET_PIXEL = 100;

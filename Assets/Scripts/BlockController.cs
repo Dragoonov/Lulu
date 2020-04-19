@@ -8,11 +8,16 @@ public class BlockController : MonoBehaviour
     GameObject unblockShape;
     string targetName;
     Color targetColor;
-    void Start()
+
+    private void Awake()
     {
         parent = transform.parent.gameObject.GetComponent<BlueprintController>();
         unblockShape = transform.Find("UnblockShape").gameObject;
         targetName = unblockShape.GetComponent<SpriteRenderer>().sprite.name;
+    }
+    void Start()
+    {
+        
     }
 
     public void SetShape(Sprite sprite, Color color)

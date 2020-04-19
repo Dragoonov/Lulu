@@ -25,8 +25,8 @@ public class ShapeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //HandleTouch();
-        HandleMouse();
+        HandleTouch();
+        //HandleMouse();
     }
 
     private void HandleTouch()
@@ -41,8 +41,10 @@ public class ShapeController : MonoBehaviour
             {
                 Expand();
             }
-            else
-                Shrink();
+        }
+        if(!rising)
+        {
+            Shrink();
         }
     }
 

@@ -41,8 +41,8 @@ public class ColorsController : MonoBehaviour
         if (!paused)
         {
             CheckIfGoalMatched();
-           // HandleTouch();
-            HandleMouse();
+            HandleTouch();
+            //HandleMouse();
         }
     }
 
@@ -100,10 +100,16 @@ public class ColorsController : MonoBehaviour
 
     private void HandleInputDown(Vector2 objPosition, int fingerId = 0)
     {
-        RaycastHit2D hit = Physics2D.Raycast(objPosition, Vector2.zero);
-        if (hit.collider != null && hit.collider.gameObject.name == "ColorHolder")
+        RaycastHit2D[] hits = Physics2D.RaycastAll(objPosition, Vector3.back, 10f);
+        RaycastHit2D holderHit = new RaycastHit2D();
+        foreach (RaycastHit2D hit in hits)
         {
-            holderCopy = Instantiate(hit.collider.gameObject, new Vector3(objPosition.x, objPosition.y, 5f), Quaternion.identity);
+            if (hit.collider.gameObject.name == "ColorHolder")
+                holderHit = hit;
+        }
+        if (holderHit.collider != null && holderHit.collider.gameObject.name == "ColorHolder")
+        {
+            holderCopy = Instantiate(holderHit.collider.gameObject, new Vector3(objPosition.x, objPosition.y, 5f), Quaternion.identity);
             holderCopy.gameObject.transform.localScale = new Vector3(10, 10, 10);
             ColorHolderController copyController = holderCopy.GetComponent<ColorHolderController>();
             copyController.isDragging = true;
@@ -111,7 +117,7 @@ public class ColorsController : MonoBehaviour
                 new HashSet<string>(GameObject.Find("ColorHolder").GetComponent<ColorHolderController>().assignableShapes);
             DisableAssignableBlueprints();
         }
-        else if (hit.collider == null || hit.collider.gameObject.name.Contains("Clone"))
+        else if (holderCopy == null)
         {
             if (objPosition.x < 0 && objPosition.y > 0 && IsBlueprintActivated(topLeftBlueprint))
             {
@@ -137,12 +143,13 @@ public class ColorsController : MonoBehaviour
         Color holderColor = holderCopy.GetComponent<SpriteRenderer>().color;
         RaycastHit2D hit = Physics2D.Raycast(objPosition, Vector3.back, 1f);
         EnableAssignableBlueprints();
-        if (hit.collider != null)
+        if (hit.collider != null && !hit.collider.name.Contains("Clone"))
         {
             Debug.Log("Hit: " + hit.collider.gameObject.name + ", started on position: " + objPosition);
             GameObject obj = hit.collider.gameObject;
             Debug.Log(holderCopy.GetComponent<ColorHolderController>().assignableShapes.Count);
             obj.GetComponent<SpriteRenderer>().color = holderColor;
+            obj.GetComponent<BlueprintController>().tempColor = holderColor;
         }
         if (holderCopy != null)
         {

@@ -8,7 +8,8 @@ public class LockController : MonoBehaviour
     GameObject unlockShape;
     string targetName;
     Color targetColor;
-    void Start()
+
+    private void Awake()
     {
         parent = transform.parent.gameObject.GetComponent<BlueprintController>();
         unlockShape = transform.Find("UnlockShape").gameObject;

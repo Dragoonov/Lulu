@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
 
 public class GameStateController : MonoBehaviour
@@ -9,6 +10,7 @@ public class GameStateController : MonoBehaviour
     AudioSource source;
     public bool muted;
     private const string LAST_LEVEL_KEY = "last_level";
+    public int adCounter = 0;
     public int LastLevel
     {
         get
@@ -18,6 +20,16 @@ public class GameStateController : MonoBehaviour
         set
         {
             SaveLastLevel(value);
+        }
+    }
+
+    public void ShowAd()
+    {
+        adCounter++;
+        if(adCounter >= 3)
+        {
+            Advertisement.Show();
+            adCounter = 0;
         }
     }
 
@@ -62,7 +74,7 @@ public class GameStateController : MonoBehaviour
 
     private int GetLastLevel()
     {
-        return PlayerPrefs.GetInt(LAST_LEVEL_KEY,1);
+        return PlayerPrefs.GetInt(LAST_LEVEL_KEY,-1);
     }
 
 }

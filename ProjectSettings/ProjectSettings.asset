@@ -636,10 +636,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 44386e76-271b-419d-84b9-a1f28765c621
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: Lulu
+  organizationId: dragovonnova
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

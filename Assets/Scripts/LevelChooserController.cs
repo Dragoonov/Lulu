@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
 
 public class LevelChooserController : MonoBehaviour
@@ -33,6 +34,16 @@ public class LevelChooserController : MonoBehaviour
             currentLevel = colorsController.level;
         }
     }
+
+    public void StartNextLevel()
+    {
+        if(currentLevel < 20)
+        {
+            Advertisement.Show();
+            StartLevel(currentLevel + 1);
+        }
+    }
+
     public void StartLevel(int level)
     {
         if (level == 1)
@@ -59,6 +70,7 @@ public class LevelChooserController : MonoBehaviour
 
     public void RestartLevel()
     {
+        Advertisement.Show();
         StartLevel(currentLevel);
     }
 

@@ -135,14 +135,17 @@ public class ColorsController : MonoBehaviour
     private void HandleInputUp(Vector2 objPosition)
     {
         Color holderColor = holderCopy.GetComponent<SpriteRenderer>().color;
-        RaycastHit2D hit = Physics2D.Raycast(objPosition, Vector3.back, 10f);
-        Debug.Log("Hit: " + hit.collider.gameObject + ", started on position: " + objPosition);
+        RaycastHit2D hit = Physics2D.Raycast(objPosition, Vector3.back, 1f);
+        EnableAssignableBlueprints();
         if (hit.collider != null)
         {
-            EnableAssignableBlueprints();
+            Debug.Log("Hit: " + hit.collider.gameObject.name + ", started on position: " + objPosition);
             GameObject obj = hit.collider.gameObject;
             Debug.Log(holderCopy.GetComponent<ColorHolderController>().assignableShapes.Count);
             obj.GetComponent<SpriteRenderer>().color = holderColor;
+        }
+        if (holderCopy != null)
+        {
             Destroy(holderCopy);
             holderCopy = null;
         }

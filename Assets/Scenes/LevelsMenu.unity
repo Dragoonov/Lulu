@@ -211,6 +211,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2798681389735109878, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3941690370343366500, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
         type: 3}
       propertyPath: m_Name
@@ -271,9 +276,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3941690371240418002, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
+    - target: {fileID: 3941690371240418000, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
         type: 3}
-      propertyPath: m_UiScaleMode
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3941690371240418012, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
@@ -281,10 +286,37 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3941690371637012043, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae6bf74cdab9af04e923ea78dbadcbc1, type: 3}
+--- !u!1 &3941690372009926005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3941690370343366500, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3941690372009926004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3941690372009926006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3941690372009926005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14d8dc31849e4bfd9cf28a2154111d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phoneObj: {fileID: 3941690372009926008}
+  tabletObj: {fileID: 3941690372009926007}
+--- !u!1 &3941690372009926007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6509323682451278635, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3941690372009926004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3941690372009926008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3941690371240418000, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3941690372009926004}
+  m_PrefabAsset: {fileID: 0}

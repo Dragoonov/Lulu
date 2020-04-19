@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 1969585782}
   - component: {fileID: 1969585783}
   - component: {fileID: 1969585784}
+  - component: {fileID: 1969585785}
   m_Layer: 0
   m_Name: GameStateController
   m_TagString: Untagged
@@ -411,6 +412,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1969585785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969585781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a3aff43d3914d97bed46bddd20003c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7949457401264472666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -473,10 +486,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1298146204825898735, guid: c58d71069c1da784ead62c08b8bb279f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2798701051184877566, guid: c58d71069c1da784ead62c08b8bb279f,
         type: 3}
       propertyPath: m_Name
       value: MenuBackground
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5186072574377802160, guid: c58d71069c1da784ead62c08b8bb279f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979053674848693846, guid: c58d71069c1da784ead62c08b8bb279f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7949457401264472668, guid: c58d71069c1da784ead62c08b8bb279f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c58d71069c1da784ead62c08b8bb279f, type: 3}
+--- !u!1 &7949457401264472667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2798701051184877566, guid: c58d71069c1da784ead62c08b8bb279f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7949457401264472666}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7949457401264472668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7949457401264472667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14d8dc31849e4bfd9cf28a2154111d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phoneObj: {fileID: 7949457401264472670}
+  tabletObj: {fileID: 7949457401264472669}
+--- !u!1 &7949457401264472669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2448999662536118983, guid: c58d71069c1da784ead62c08b8bb279f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7949457401264472666}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7949457401264472670 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5186072574377802160, guid: c58d71069c1da784ead62c08b8bb279f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7949457401264472666}
+  m_PrefabAsset: {fileID: 0}

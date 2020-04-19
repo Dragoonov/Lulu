@@ -64,6 +64,7 @@ public class BlueprintController : MonoBehaviour
     void Start()
     {
         SetPositionViewport();
+        //SetPositionPixel();
         tempColor = renderer.color;
         blockObject.SetActive(false);
         lockObject.SetActive(false);
@@ -84,22 +85,25 @@ public class BlueprintController : MonoBehaviour
         if(shape.name == "triangle")
         {
             transform.position = Camera.main.ScreenToWorldPoint(
-                new Vector3(POSITION_OFFSET_PIXEL, POSITION_OFFSET_PIXEL, 10));
+                new Vector3(Screen.safeArea.x + POSITION_OFFSET_PIXEL, Screen.safeArea.y + POSITION_OFFSET_PIXEL, 10));
         }
         if (shape.name == "circle")
         {
             transform.position = Camera.main.ScreenToWorldPoint(
-                new Vector3(POSITION_OFFSET_PIXEL, Camera.main.pixelHeight - POSITION_OFFSET_PIXEL, 10));
+                new Vector3(Screen.safeArea.x + POSITION_OFFSET_PIXEL,
+                Screen.safeArea.height - POSITION_OFFSET_PIXEL, 10));
         }
         if (shape.name == "square")
         {
             transform.position = Camera.main.ScreenToWorldPoint(
-                new Vector3(Camera.main.pixelWidth - POSITION_OFFSET_PIXEL, Camera.main.pixelHeight - POSITION_OFFSET_PIXEL, 10));
+                new Vector3(Screen.safeArea.width - POSITION_OFFSET_PIXEL,
+                Screen.safeArea.height - POSITION_OFFSET_PIXEL, 10));
         }
         if (shape.name == "pentagon")
         {
             transform.position = Camera.main.ScreenToWorldPoint(
-                new Vector3(Camera.main.pixelWidth - POSITION_OFFSET_PIXEL, POSITION_OFFSET_PIXEL, 10));
+                new Vector3(Screen.safeArea.width - POSITION_OFFSET_PIXEL,
+                POSITION_OFFSET_PIXEL + Screen.safeArea.y, 10));
         }
     }
 

@@ -13,6 +13,7 @@ public class HelpController : MonoBehaviour
 
     public void Initialize()
     {
+
         for (int i = 0; i < 6; i++)
         {
             GameObject helper = GameObject.Find("Helper" + i).transform.GetChild(0).gameObject;

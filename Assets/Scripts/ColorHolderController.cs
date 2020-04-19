@@ -10,6 +10,7 @@ public class ColorHolderController : MonoBehaviour
     public HashSet<string> assignableShapes;
     public bool isDragging;
     private Color defaultColor;
+    private const int POSITION_OFFSET_PIXEL = 200;
 
     private void Awake()
     {
@@ -23,6 +24,15 @@ public class ColorHolderController : MonoBehaviour
         Debug.Log(renderer);
         colors = new List<Color>();
         defaultColor = renderer.color;
+        SetPosition();
+    }
+
+    private void SetPosition()
+    {
+        float y = Camera.main.ScreenToViewportPoint(
+            new Vector2(0, Screen.safeArea.height)).y;
+        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f,y-0.15f,
+            15));
     }
 
     void Update()

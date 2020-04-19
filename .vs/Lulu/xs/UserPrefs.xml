@@ -1,9 +1,16 @@
 ﻿<Properties StartupConfiguration="{EAB36060-8F84-DFDD-C717-233E3FF7EA9B}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BlueprintController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LevelChooserController.cs">
     <Files>
-      <File FileName="Assets/Scripts/ColorsController.cs" Line="63" Column="24" />
-      <File FileName="Assets/Scripts/ShapeController.cs" />
-      <File FileName="Assets/Scripts/BlueprintController.cs" Line="109" Column="34" />
+      <File FileName="Assets/Scripts/ColorsController.cs" Line="32" Column="15" />
+      <File FileName="Assets/Scripts/ShapeController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/BlueprintController.cs" />
+      <File FileName="Assets/Scripts/ColorHolderController.cs" />
+      <File FileName="Assets/MainMenuController.cs" />
+      <File FileName="Assets/DeviceCheck.cs" />
+      <File FileName="Assets/Scripts/HelpController.cs" />
+      <File FileName="Assets/InitializeAdsScript.cs" Line="7" Column="29" />
+      <File FileName="Assets/Scripts/LevelChooserController.cs" Line="15" Column="26" />
+      <File FileName="Assets/Scripts/GameStateController.cs" Line="12" Column="20" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,7 +18,7 @@
           <Node name="Lulu" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="BlueprintController.cs" selected="True" />
+                <Node name="LevelChooserController.cs" selected="True" />
               </Node>
             </Node>
           </Node>

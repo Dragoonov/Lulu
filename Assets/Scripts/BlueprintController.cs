@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BlueprintController : MonoBehaviour
@@ -10,6 +11,8 @@ public class BlueprintController : MonoBehaviour
     public Color tempColor;
     public GameObject lockObject;
     public GameObject blockObject;
+    public TextMeshProUGUI spawnAmountObj;
+    public int spawnAmount;
     private const int POSITION_OFFSET_PIXEL = 100;
 
     [SerializeField]
@@ -63,6 +66,7 @@ public class BlueprintController : MonoBehaviour
 
     void Start()
     {
+        spawnAmountObj.text = "";
         SetPositionViewport();
         //SetPositionPixel();
         tempColor = renderer.color;
@@ -77,7 +81,16 @@ public class BlueprintController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateSpawnAmount();
+    }
+
+    private void UpdateSpawnAmount()
+    {
+        if(spawnAmount > 50)
+        {
+            return;
+        }
+        spawnAmountObj.text = spawnAmount.ToString();
     }
 
     private void SetPositionPixel()
@@ -141,11 +154,12 @@ public class BlueprintController : MonoBehaviour
 
     public void CreateShape(Vector2 position, int fingerId)
     {
-        if(!Blocked)
+        if(!Blocked && spawnAmount > 0)
         {
             GameObject clone = Instantiate(shape, position, Quaternion.identity);
             clone.GetComponent<SpriteRenderer>().color = renderer.color;
             clone.GetComponent<ShapeController>().fingerId = fingerId;
+            spawnAmount--;
         }
     }
 

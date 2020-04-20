@@ -104,7 +104,7 @@ public class ColorsController : MonoBehaviour
         RaycastHit2D holderHit = new RaycastHit2D();
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit.collider.gameObject.name == "ColorHolder")
+            if (hit.collider.gameObject.name == "ColorHolder" || hit.collider.gameObject.name == "TempColorHolder")
                 holderHit = hit;
         }
         if (holderHit.collider != null && holderHit.collider.gameObject.name == "ColorHolder")
@@ -117,7 +117,9 @@ public class ColorsController : MonoBehaviour
                 new HashSet<string>(GameObject.Find("ColorHolder").GetComponent<ColorHolderController>().assignableShapes);
             DisableAssignableBlueprints();
         }
-        else if (holderCopy == null)
+        else if (holderHit.collider == null ||
+            (holderHit.collider.gameObject.name != "ColorHolder" &&
+            holderHit.collider.gameObject.name != "TempColorHolder"))
         {
             if (objPosition.x < 0 && objPosition.y > 0 && IsBlueprintActivated(topLeftBlueprint))
             {

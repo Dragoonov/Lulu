@@ -66,7 +66,7 @@ public class LevelChooserController : MonoBehaviour
         if (level == 3)
         {
             Color goal = (((Color.red + Color.green) / 2) + Color.blue) / 2;
-            LevelDataHolder.SetTopLeftBlueprint(Color.red);
+            LevelDataHolder.SetTopLeftBlueprint(Color.red,4);
             LevelDataHolder.SetTopRightBlueprint(Color.green);
             LevelDataHolder.SetBottomLeftBlueprint(Color.yellow);
             LevelDataHolder.SetBottomRightBlueprint(Color.blue);
@@ -77,7 +77,11 @@ public class LevelChooserController : MonoBehaviour
             Color goal = (Color.green + Color.yellow) / 2;
             LevelDataHolder.SetTopLeftBlueprint(Color.red);
             LevelDataHolder.SetTopRightBlueprint(Color.green);
-            LevelDataHolder.SetBottomLeftBlueprint(Color.yellow, EffectType.LOCK, circle, (Color.red + Color.blue)/2);
+            LevelDataHolder.SetBottomLeftBlueprint(
+                colorOwn: Color.yellow,
+                effect: EffectType.LOCK,
+                sprite: circle,
+                color: (Color.red + Color.blue)/2);
             LevelDataHolder.SetBottomRightBlueprint(Color.blue);
             LevelDataHolder.SetGoal(triangle, goal);
         }
@@ -86,17 +90,33 @@ public class LevelChooserController : MonoBehaviour
             Color goal = (Color.red + Color.blue) / 2;
             LevelDataHolder.SetTopLeftBlueprint(Color.red);
             LevelDataHolder.SetTopRightBlueprint(Color.green);
-            LevelDataHolder.SetBottomLeftBlueprint(Color.yellow, EffectType.LOCK, square, (Color.red + Color.green) / 2);
-            LevelDataHolder.SetBottomRightBlueprint(Color.blue, EffectType.BLOCK, triangle, (Color.yellow + Color.red) / 2);
+            LevelDataHolder.SetBottomLeftBlueprint(
+                colorOwn: Color.yellow,
+                effect: EffectType.LOCK,
+                sprite: square,
+                color: (Color.red + Color.green) / 2);
+            LevelDataHolder.SetBottomRightBlueprint(
+                colorOwn: Color.blue,
+                effect: EffectType.BLOCK,
+                sprite: triangle,
+                color: (Color.yellow + Color.red) / 2);
             LevelDataHolder.SetGoal(circle, goal);
         }
         if (level == 6)
         {
             Color goal = Color.magenta;
             LevelDataHolder.SetTopLeftBlueprint(Color.red);
-            LevelDataHolder.SetTopRightBlueprint(Color.blue, EffectType.BLOCK, triangle, (((Color.green + Color.red) / 2) + Color.green) / 2);
+            LevelDataHolder.SetTopRightBlueprint(
+                colorOwn: Color.blue,
+                effect: EffectType.BLOCK,
+                sprite: triangle,
+                color: (((Color.green + Color.red) / 2) + Color.green) / 2);
             LevelDataHolder.SetBottomLeftBlueprint(Color.green);
-            LevelDataHolder.SetBottomRightBlueprint(Color.magenta, EffectType.BLOCK, triangle, (Color.blue + ((((Color.green + Color.red) / 2) + Color.green) / 2))/2);
+            LevelDataHolder.SetBottomRightBlueprint(
+                colorOwn: Color.magenta,
+                effect: EffectType.BLOCK,
+                sprite: triangle,
+                color: (Color.blue + ((((Color.green + Color.red) / 2) + Color.green) / 2))/2);
             LevelDataHolder.SetGoal(pentagon, goal);
         }
         if (level == 7)
@@ -104,8 +124,16 @@ public class LevelChooserController : MonoBehaviour
             Color goal = (Color.green + Color.yellow) / 2;
             LevelDataHolder.SetTopLeftBlueprint(Color.red);
             LevelDataHolder.SetTopRightBlueprint(Color.green);
-            LevelDataHolder.SetBottomLeftBlueprint(Color.yellow, EffectType.LOCK, circle, (Color.red + Color.green) / 2);
-            LevelDataHolder.SetBottomRightBlueprint(Color.blue, EffectType.BLOCK, triangle, (Color.yellow + Color.red) / 2);
+            LevelDataHolder.SetBottomLeftBlueprint(
+                colorOwn: Color.yellow,
+                effect: EffectType.LOCK,
+                sprite: circle,
+                color: (Color.red + Color.green) / 2);
+            LevelDataHolder.SetBottomRightBlueprint(
+                colorOwn: Color.blue,
+                effect: EffectType.BLOCK,
+                sprite: triangle,
+                color: (Color.yellow + Color.red) / 2);
             LevelDataHolder.SetGoal(triangle, goal);
         }
         controller.PlayTapSound();

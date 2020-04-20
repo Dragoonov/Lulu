@@ -23,7 +23,7 @@ public class LevelDataHolder
         };
     }
 
-    public static void SetTopLeftBlueprint(Color colorOwn = new Color(), EffectType effect = EffectType.NONE, Sprite sprite = null, Color color = new Color())
+    public static void SetTopLeftBlueprint(Color colorOwn = new Color(),int spawnAmount = 999, EffectType effect = EffectType.NONE, Sprite sprite = null, Color color = new Color())
     {
         topLeftBlueprint = new BlueprintData
         {
@@ -31,10 +31,11 @@ public class LevelDataHolder
             effect = effect,
             sprite = sprite,
             conditionColor = color,
+            spawnAmount = spawnAmount,
         };
     }
 
-    public static void SetTopRightBlueprint(Color colorOwn = new Color(), EffectType effect = EffectType.NONE, Sprite sprite = null, Color color = new Color())
+    public static void SetTopRightBlueprint(Color colorOwn = new Color(), int spawnAmount = 999, EffectType effect = EffectType.NONE, Sprite sprite = null, Color color = new Color())
     {
         topRightBlueprint = new BlueprintData
         {
@@ -42,6 +43,7 @@ public class LevelDataHolder
             effect = effect,
             sprite = sprite,
             conditionColor = color,
+            spawnAmount = spawnAmount,
         };
     }
 
@@ -50,7 +52,7 @@ public class LevelDataHolder
         level = lev;
     }
 
-    public static void SetBottomLeftBlueprint(Color colorOwn = new Color(), EffectType effect = EffectType.NONE, Sprite sprite = null, Color color = new Color())
+    public static void SetBottomLeftBlueprint(Color colorOwn = new Color(), int spawnAmount = 999, EffectType effect = EffectType.NONE, Sprite sprite = null, Color color = new Color())
     {
         bottomLeftBlueprint = new BlueprintData
         {
@@ -58,10 +60,11 @@ public class LevelDataHolder
             effect = effect,
             sprite = sprite,
             conditionColor = color,
+            spawnAmount = spawnAmount,
         };
     }
 
-    public static void SetBottomRightBlueprint(Color colorOwn = new Color(), EffectType effect = EffectType.NONE, Sprite sprite = null, Color color = new Color())
+    public static void SetBottomRightBlueprint(Color colorOwn = new Color(), int spawnAmount = 999, EffectType effect = EffectType.NONE, Sprite sprite = null, Color color = new Color())
     {
         bottomRightBlueprint = new BlueprintData
         {
@@ -69,6 +72,7 @@ public class LevelDataHolder
             effect = effect,
             sprite = sprite,
             conditionColor = color,
+            spawnAmount = spawnAmount,
         };
     }
 
@@ -80,6 +84,7 @@ public class LevelDataHolder
                 controller.gameObject.SetActive(false);
             else
             {
+                controller.spawnAmount = data.spawnAmount;
                 controller.gameObject.GetComponent<SpriteRenderer>().color = data.color;
                 if (data.effect == EffectType.BLOCK)
                     controller.Block(data.sprite, data.conditionColor);
@@ -116,6 +121,7 @@ public class LevelDataHolder
         public EffectType effect;
         public Sprite sprite;
         public Color conditionColor;
+        public int spawnAmount;
     }
 
     class GoalData

@@ -4451,6 +4451,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3941690370343366502}
   - component: {fileID: 3941690370343366501}
+  - component: {fileID: 3941690372009926006}
+  - component: {fileID: 3941690372009926009}
   m_Layer: 0
   m_Name: LevelsMenu
   m_TagString: Untagged
@@ -4491,6 +4493,32 @@ MonoBehaviour:
   circle: {fileID: 21300000, guid: b3bd4d959d220ca40a506a13874fed10, type: 3}
   square: {fileID: 21300000, guid: 4e445ae50e6799741ae1b92ff5b2d85a, type: 3}
   pentagon: {fileID: 21300000, guid: 45130aa47e198b949890f394eb6eebc8, type: 3}
+--- !u!114 &3941690372009926006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3941690370343366500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14d8dc31849e4bfd9cf28a2154111d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phoneObj: {fileID: 3941690371240418000}
+  tabletObj: {fileID: 6509323682451278635}
+--- !u!114 &3941690372009926009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3941690370343366500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd58c5f0bcb54519a518338036eee42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3941690371240418000
 GameObject:
   m_ObjectHideFlags: 0
@@ -4509,7 +4537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3941690371240418012
 RectTransform:
   m_ObjectHideFlags: 0

@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muted: 0
+  adCounter: 0
 --- !u!82 &1969585784
 AudioSource:
   m_ObjectHideFlags: 0

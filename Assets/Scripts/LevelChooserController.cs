@@ -71,6 +71,7 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetBottomLeftBlueprint(Color.yellow);
             LevelDataHolder.SetBottomRightBlueprint(Color.blue);
             LevelDataHolder.SetGoal(circle, goal);
+            LevelDataHolder.SetTempHolderData(Color.red);
         }
         if (level == 4)
         {

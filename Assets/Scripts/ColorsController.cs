@@ -17,6 +17,7 @@ public class ColorsController : MonoBehaviour
     public GameObject finishModal;
     public Image goal;
     public int level;
+    public TempColorHolderController tempColorHolder;
 
     GameObject holderCopy;
     public bool paused;
@@ -57,7 +58,7 @@ public class ColorsController : MonoBehaviour
             }
             if (touch.phase == TouchPhase.Ended)
             {
-                if (holderCopy != null)
+                if (holderCopy != null || (tempColorHolder!= null && tempColorHolder.isDragging))
                 {
                     Vector2 objPosition = Camera.main.ScreenToWorldPoint(touch.position);
                     HandleInputUp(objPosition);
@@ -117,6 +118,10 @@ public class ColorsController : MonoBehaviour
                 new HashSet<string>(GameObject.Find("ColorHolder").GetComponent<ColorHolderController>().assignableShapes);
             DisableAssignableBlueprints();
         }
+        if (holderHit.collider != null && holderHit.collider.gameObject.name == "TempColorHolder")
+        {
+            tempColorHolder.isDragging = true;
+        }
         else if (holderHit.collider == null ||
             (holderHit.collider.gameObject.name != "ColorHolder" &&
             holderHit.collider.gameObject.name != "TempColorHolder"))
@@ -142,22 +147,56 @@ public class ColorsController : MonoBehaviour
 
     private void HandleInputUp(Vector2 objPosition)
     {
-        Color holderColor = holderCopy.GetComponent<SpriteRenderer>().color;
-        RaycastHit2D hit = Physics2D.Raycast(objPosition, Vector3.back, 1f);
-        EnableAssignableBlueprints();
-        if (hit.collider != null && !hit.collider.name.Contains("Clone"))
+        Color holderColor = new Color();
+        RaycastHit2D[] hits = Physics2D.RaycastAll(objPosition, Vector3.back, 10f);
+        RaycastHit2D hit = new RaycastHit2D();
+        foreach (RaycastHit2D hite in hits)
         {
-            Debug.Log("Hit: " + hit.collider.gameObject.name + ", started on position: " + objPosition);
-            GameObject obj = hit.collider.gameObject;
-            Debug.Log(holderCopy.GetComponent<ColorHolderController>().assignableShapes.Count);
-            obj.GetComponent<SpriteRenderer>().color = holderColor;
-            obj.GetComponent<BlueprintController>().tempColor = holderColor;
+            if (hite.collider.gameObject.layer == LayerMask.NameToLayer("Blueprint") || hite.collider.gameObject.name == "TempColorHolder")
+            {
+                hit = hite;
+            }
         }
         if (holderCopy != null)
         {
+            Debug.Log("Pierwszy komentarz");
+            EnableAssignableBlueprints();
+            holderColor = holderCopy.GetComponent<SpriteRenderer>().color;
+            if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Blueprint"))
+            {
+                Debug.Log("Hit: " + hit.collider.gameObject.name + ", started on position: " + objPosition);
+                GameObject obj = hit.collider.gameObject;
+                Debug.Log(holderCopy.GetComponent<ColorHolderController>().assignableShapes.Count);
+                obj.GetComponent<SpriteRenderer>().color = holderColor;
+                obj.GetComponent<BlueprintController>().tempColor = holderColor;
+            }
+            if (hit.collider != null && hit.collider.gameObject.name == "TempColorHolder")
+            {
+                Debug.Log("Hit: " + hit.collider.gameObject.name + ", started on position: " + objPosition);
+                GameObject obj = hit.collider.gameObject;
+                obj.GetComponent<SpriteRenderer>().color = holderColor;
+            }
             Destroy(holderCopy);
             holderCopy = null;
         }
+        else if (tempColorHolder != null && tempColorHolder.isDragging)
+        {
+            Debug.Log("Drugi komentarz");
+            holderColor = tempColorHolder.GetComponent<SpriteRenderer>().color;
+            if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Blueprint"))
+            {
+                Debug.Log("Trzeci komentarz");
+                Debug.Log("Hit: " + hit.collider.gameObject.name + ", started on position: " + objPosition);
+                GameObject obj = hit.collider.gameObject;
+                obj.GetComponent<SpriteRenderer>().color = holderColor;
+                obj.GetComponent<BlueprintController>().tempColor = holderColor;
+                Destroy(tempColorHolder.gameObject);
+                tempColorHolder = null;
+            }
+            else
+                tempColorHolder.Drop();
+        }
+        Debug.Log("Czwarty komentarz");
     }
 
     private void DisableAssignableBlueprints()

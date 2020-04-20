@@ -3130,6 +3130,7 @@ MonoBehaviour:
   finishModal: {fileID: 1979915300}
   goal: {fileID: 833532419}
   level: 0
+  tempColorHolder: {fileID: 1632217081125886458}
   paused: 0
 --- !u!4 &982474398
 Transform:
@@ -8265,8 +8266,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 595610415675996301, guid: fb4d2b79526f9419db84859f15c5d4fe,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb4d2b79526f9419db84859f15c5d4fe, type: 3}
+--- !u!114 &1632217081125886458 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7732751135852320021, guid: fb4d2b79526f9419db84859f15c5d4fe,
+    type: 3}
+  m_PrefabInstance: {fileID: 1632217081125886457}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab7e1995f6b4446a9cb61480047a9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2588771370895116556 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 559278003755042457, guid: d24c9b43f4ed5415d8dd8cbdaa4bad4d,
@@ -8302,11 +8320,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TopRightBlueprint
-      objectReference: {fileID: 0}
-    - target: {fileID: 1756199590233863359, guid: 693449b42147a40738e1baf69e3a343e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 5990549442373461966, guid: 693449b42147a40738e1baf69e3a343e,
         type: 3}
@@ -8441,26 +8454,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1861152235490900190, guid: 29f9ec1b9085e404e977e82d2018798f,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1861152235490900190, guid: 29f9ec1b9085e404e977e82d2018798f,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1861152235490900190, guid: 29f9ec1b9085e404e977e82d2018798f,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1861152235490900190, guid: 29f9ec1b9085e404e977e82d2018798f,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 3837824089109804431, guid: 29f9ec1b9085e404e977e82d2018798f,
         type: 3}
       propertyPath: m_LocalPosition.x

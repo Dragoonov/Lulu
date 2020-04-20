@@ -11,8 +11,8 @@ public class LevelDataHolder
     static BlueprintData bottomLeftBlueprint;
     static BlueprintData bottomRightBlueprint;
     static GoalData goal;
+    static TempHolderData tempHolderData;
     static int level;
-
 
     public static void SetGoal(Sprite sprite, Color color)
     {
@@ -20,6 +20,14 @@ public class LevelDataHolder
         {
             sprite = sprite,
             color = color
+        };
+    }
+
+    public static void SetTempHolderData(Color color)
+    {
+        tempHolderData = new TempHolderData
+        {
+            color = color,
         };
     }
 
@@ -97,10 +105,19 @@ public class LevelDataHolder
     public static void InjectData(ColorsController controller)
     {
         controller.level = level;
-        if(goal != null)
+
+        if (goal != null)
         {
             controller.goal.color = goal.color;
             controller.goal.sprite = goal.sprite;
+        }
+        if (tempHolderData != null)
+        {
+            controller.tempColorHolder.gameObject.GetComponent<SpriteRenderer>().color = tempHolderData.color;
+        }
+        else
+        {
+            controller.tempColorHolder.gameObject.SetActive(false);
         }
         InjectToBlueprint(controller.topLeftBlueprint, topLeftBlueprint);
         InjectToBlueprint(controller.topRightBlueprint, topRightBlueprint);
@@ -127,6 +144,11 @@ public class LevelDataHolder
     class GoalData
     {
         public Sprite sprite;
+        public Color color;
+    }
+
+    class TempHolderData
+    {
         public Color color;
     }
 }

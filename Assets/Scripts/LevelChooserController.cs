@@ -75,7 +75,6 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetBottomLeftBlueprint(Color.yellow);
             LevelDataHolder.SetBottomRightBlueprint(Color.blue);
             LevelDataHolder.SetGoal(circle, goal);
-            LevelDataHolder.SetTempHolderData(Color.red);
         }
         //Tutorial lock
         if (level == 4)
@@ -207,6 +206,7 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetGoal(pentagon, goal);
         }
         controller.PlayTapSound();
+        controller.ShowAd();
         SceneManager.LoadScene("MainScene");
     }
 

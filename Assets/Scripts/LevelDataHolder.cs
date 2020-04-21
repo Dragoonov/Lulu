@@ -130,6 +130,7 @@ public class LevelDataHolder
     {
         topLeftBlueprint = topRightBlueprint = bottomLeftBlueprint = bottomRightBlueprint = null;
         goal = null;
+        tempHolderData = null;
     }
 
     class BlueprintData

@@ -26,7 +26,7 @@ public class GameStateController : MonoBehaviour
     public void ShowAd()
     {
         adCounter++;
-        if(adCounter >= 3)
+        if(adCounter >= 5)
         {
             Advertisement.Show();
             adCounter = 0;

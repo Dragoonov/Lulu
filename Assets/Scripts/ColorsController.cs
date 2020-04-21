@@ -88,8 +88,8 @@ public class ColorsController : MonoBehaviour
 
     private void CheckIfGoalMatched()
     {
-        GameObject finalGoal = GameObject.Find(goal.sprite.name + "(Clone)");
-        if(finalGoal != null)
+        GameObject[] finalGoals = GameObject.FindGameObjectsWithTag("Spawned");
+        foreach(GameObject finalGoal in finalGoals)
         {
             if(finalGoal.GetComponent<SpriteRenderer>().color == goal.color && finalGoal.transform.localScale.x >= GOAL_SCALE)
             {

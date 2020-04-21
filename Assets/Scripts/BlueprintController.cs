@@ -157,6 +157,7 @@ public class BlueprintController : MonoBehaviour
         if(!Blocked && spawnAmount > 0)
         {
             GameObject clone = Instantiate(shape, position, Quaternion.identity);
+            clone.tag = "Spawned";
             clone.GetComponent<SpriteRenderer>().color = renderer.color;
             clone.GetComponent<ShapeController>().fingerId = fingerId;
             spawnAmount--;

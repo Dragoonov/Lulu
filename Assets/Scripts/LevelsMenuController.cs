@@ -14,10 +14,10 @@ public class LevelsMenuController : MonoBehaviour
         {
             lastLevel = 1;
         }
-        for (int i=lastLevel+1;i<=LEVEL_AMOUNT;i++)
-        {
-            transform.Find("Button (" + i + ")").GetComponent<Button>().interactable = false;
-        }
+        //for (int i=lastLevel+1;i<=LEVEL_AMOUNT;i++)
+        //{
+        //    transform.Find("Button (" + i + ")").GetComponent<Button>().interactable = false;
+        //}
     }
 
     // Update is called once per frame

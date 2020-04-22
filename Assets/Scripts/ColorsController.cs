@@ -34,6 +34,7 @@ public class ColorsController : MonoBehaviour
         {
             stateController.LastLevel = level;
         }
+        
     }
 
     // Update is called once per frame

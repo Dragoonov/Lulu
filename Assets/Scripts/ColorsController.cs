@@ -92,7 +92,7 @@ public class ColorsController : MonoBehaviour
         GameObject[] finalGoals = GameObject.FindGameObjectsWithTag("Spawned");
         foreach(GameObject finalGoal in finalGoals)
         {
-            if(finalGoal.GetComponent<SpriteRenderer>().color == goal.color &&
+            if(ColorMatched(finalGoal.GetComponent<SpriteRenderer>().color) &&
                 finalGoal.transform.localScale.x >= GOAL_SCALE &&
                 finalGoal.name.Contains(goal.sprite.name))
             {
@@ -104,10 +104,14 @@ public class ColorsController : MonoBehaviour
 
     private bool ColorMatched(Color color)
     {
-        if (Mathf.Abs(color.r - goal.color.r) <= 10 &&
-            Mathf.Abs(color.g - goal.color.g) <= 10 &&
-            Mathf.Abs(color.b - goal.color.b) <= 10)
+        if (Mathf.Abs(color.r - goal.color.r) <= 10f/255 &&
+            Mathf.Abs(color.g - goal.color.g) <= 10f/255 &&
+            Mathf.Abs(color.b - goal.color.b) <= 10f/255)
+        {
+            Debug.Log(goal + " GOAL");
+            Debug.Log(color + " COLOR");
             return true;
+        }
         else
             return false;
     }
@@ -172,7 +176,6 @@ public class ColorsController : MonoBehaviour
         }
         if (holderCopy != null)
         {
-            Debug.Log("Pierwszy komentarz");
             EnableAssignableBlueprints();
             holderColor = holderCopy.GetComponent<SpriteRenderer>().color;
             if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Blueprint"))
@@ -194,11 +197,9 @@ public class ColorsController : MonoBehaviour
         }
         else if (tempColorHolder != null && tempColorHolder.isDragging)
         {
-            Debug.Log("Drugi komentarz");
             holderColor = tempColorHolder.GetComponent<SpriteRenderer>().color;
             if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Blueprint"))
             {
-                Debug.Log("Trzeci komentarz");
                 Debug.Log("Hit: " + hit.collider.gameObject.name + ", started on position: " + objPosition);
                 GameObject obj = hit.collider.gameObject;
                 obj.GetComponent<SpriteRenderer>().color = holderColor;
@@ -209,7 +210,6 @@ public class ColorsController : MonoBehaviour
             else
                 tempColorHolder.Drop();
         }
-        Debug.Log("Czwarty komentarz");
     }
 
     private void DisableAssignableBlueprints()

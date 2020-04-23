@@ -32,10 +32,17 @@ public class BlockController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject desiredShape = GameObject.Find(targetName + "(Clone)");
-        if (desiredShape != null && desiredShape.transform.localScale.x > 30 && desiredShape.GetComponent<SpriteRenderer>().color == targetColor)
+        GameObject[] desiredShapes = GameObject.FindGameObjectsWithTag("Spawned");
+        foreach (GameObject desiredShape in desiredShapes)
         {
-            parent.Blocked = false;
+            if (desiredShape != null &&
+                desiredShape.name == targetName + "(Clone)" &&
+                desiredShape.transform.localScale.x > 30 &&
+                desiredShape.GetComponent<SpriteRenderer>().color == targetColor)
+            {
+                parent.Blocked = false;
+                break;
+            }
         }
     }
 }

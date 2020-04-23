@@ -47,9 +47,12 @@ public class ColorHolderController : MonoBehaviour
 
     public void AddColorWithShape(Color color, string shape)
     {
-        colors.Add(color);
-        assignableShapes.Add(shape);
-        UpdateColor();
+        if (!colors.Contains(color))
+        {
+            colors.Add(color);
+            assignableShapes.Add(shape);
+            UpdateColor();
+        }
     }
 
     public void RemoveColorWithShape(Color color, string shape)

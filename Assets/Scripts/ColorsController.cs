@@ -92,12 +92,24 @@ public class ColorsController : MonoBehaviour
         GameObject[] finalGoals = GameObject.FindGameObjectsWithTag("Spawned");
         foreach(GameObject finalGoal in finalGoals)
         {
-            if(finalGoal.GetComponent<SpriteRenderer>().color == goal.color && finalGoal.transform.localScale.x >= GOAL_SCALE)
+            if(finalGoal.GetComponent<SpriteRenderer>().color == goal.color &&
+                finalGoal.transform.localScale.x >= GOAL_SCALE &&
+                finalGoal.name.Contains(goal.sprite.name))
             {
                 Pause();
                 OpenFinishModal();
             }
         }
+    }
+
+    private bool ColorMatched(Color color)
+    {
+        if (Mathf.Abs(color.r - goal.color.r) <= 10 &&
+            Mathf.Abs(color.g - goal.color.g) <= 10 &&
+            Mathf.Abs(color.b - goal.color.b) <= 10)
+            return true;
+        else
+            return false;
     }
 
     private void HandleInputDown(Vector2 objPosition, int fingerId = 0)

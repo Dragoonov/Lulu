@@ -100,4 +100,13 @@ public class ShapeController : MonoBehaviour
             colliding = false;
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name != gameObject.name)
+        {
+            colorHolder.AddColorWithShape(currentColor, gameObject.name);
+            colliding = true;
+        }
+    }
 }

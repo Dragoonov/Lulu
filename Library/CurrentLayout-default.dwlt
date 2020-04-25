@@ -45,10 +45,10 @@ MonoBehaviour:
     y: 30
     width: 1684
     height: 821
-  m_MinSize: {x: 578, y: 492}
+  m_MinSize: {x: 678, y: 492}
   m_MaxSize: {x: 14001, y: 14042}
   vertical: 0
-  controlID: 81
+  controlID: 17
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,7 +151,7 @@ MonoBehaviour:
     y: 0
     width: 1684
     height: 871
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -217,10 +217,10 @@ MonoBehaviour:
     y: 0
     width: 1186
     height: 821
-  m_MinSize: {x: 303, y: 492}
+  m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 38
+  controlID: 23
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -242,10 +242,10 @@ MonoBehaviour:
     y: 0
     width: 1186
     height: 550
-  m_MinSize: {x: 303, y: 221}
+  m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 39
+  controlID: 84
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SimulatorWindow
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -265,15 +265,15 @@ MonoBehaviour:
     y: 0
     width: 821
     height: 550
-  m_MinSize: {x: 102, y: 121}
+  m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 13}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
   - {fileID: 13}
   - {fileID: 12}
-  m_Selected: 1
-  m_LastSelected: 2
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 1}
-  m_TargetSize: {x: 1536, y: 2048}
+  m_TargetSize: {x: 828, y: 1792}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -351,11 +351,11 @@ MonoBehaviour:
     controlPanelFoldoutValues: 010101
     extensionNames: []
     extensionStates: []
-    scale: 18
+    scale: 22
     fitToScreenEnabled: 0
     rotationDegree: 0
-    highlightSafeAreaEnabled: 1
-    friendlyName: Apple iPad (5th gen)
+    highlightSafeAreaEnabled: 0
+    friendlyName: Apple iPhone 11
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -441,9 +441,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 60}
-    m_SelectedIDs: 123d0000
-    m_LastClickedID: 15634
-    m_ExpandedIDs: 00000000fa3c0000063d000000ca9a3b
+    m_SelectedIDs: 42370000
+    m_LastClickedID: 14146
+    m_ExpandedIDs: 000000002237000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -471,7 +471,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fa3c0000
+    m_ExpandedIDs: 0000000022370000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -594,23 +594,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 6a600000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 584dffffea4efffffc4effff464fffffb452ffffc252ffff8453ffff5c58ffffaa58ffffbc58ffffb059ffff245dffffc45fffffdc5fffffc060ffff187cffff3a8affff6a91ffff8699ffffd69dfffff8a5ffff82abffffaab3fffff4b8ffffeebeffff0abffffffabfffff6ac3ffff06c6ffff1ac6ffffcaceffffe6ceffffdacfffff4ed3ffffeed5ffff06d6ffff96f6ffffb4600000b2610000666e0000646f0000ac7b0000ac7c00009a82000058830000868e0000a28e0000568f0000d48f0000de8f000076a8000038a900005cb00000c8b200007eb40000
+      m_ExpandedIDs: 9a77ffffae77fffff877ffff667bffffee7dffff027effff527effff667effffb47effff2682ffffb284ffffca84ffffb685ffff0086ffff1486ffff0887ffff7c8affff1c8dffff348dffff2e97ffff66b0ffff1cb1ffffaeb2ffff08b3ffff22b3ffff16b4ffff8ab7ffff2abaffff42baffff28c3fffff0c5ffff34ddffffb6e1ffff6cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: TopLeftBlueprint
+        m_OriginalName: TopLeftBlueprint
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 28082
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -641,10 +641,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 416
-    y: 73
-    width: 934
-    height: 613
+    x: 529
+    y: 152
+    width: 819
+    height: 529
   m_ViewDataDictionary: {fileID: 0}
   m_ShowContextualTools: 0
   m_WindowGUID: db49cdc1a5a74dd4483c0c49ab108065
@@ -656,9 +656,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.7215941, y: -2.8542244, z: -13688.27}
+    m_Target: {x: 0.6469311, y: 0.017052492, z: -13695.242}
     speed: 2
-    m_Value: {x: -1.7215941, y: -2.8542244, z: -13688.27}
+    m_Value: {x: 0.6469311, y: 0.017052492, z: -13695.242}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -708,9 +708,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 22.316902
+    m_Target: 9.899256
     speed: 2
-    m_Value: 22.316902
+    m_Value: 9.899256
   m_Ortho:
     m_Target: 1
     speed: 2

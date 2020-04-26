@@ -159,6 +159,7 @@ public class BlueprintController : MonoBehaviour
             GameObject clone = Instantiate(shape, position, Quaternion.identity);
             clone.tag = "Spawned";
             clone.GetComponent<SpriteRenderer>().color = renderer.color;
+            clone.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
             clone.GetComponent<ShapeController>().fingerId = fingerId;
             spawnAmount--;
         }

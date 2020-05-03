@@ -2,24 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempColorHolderController : MonoBehaviour
+public class TempColorHolderController : MonoBehaviour, IClickable
 {
     // Start is called before the first frame update
     private const int POSITION_OFFSET_PIXEL = 100;
-    public bool isDragging;
+    public TempHolderState state;
+    private ColorHolderController holderController;
+    private SpriteRenderer renderer;
+    private const float SELECTED_SCALE_X = 17;
+    private const float DEFAULT_SCALE_X = 15;
+    private const float DEFAULT_SCALE_Y = 10;
+    private const float SELECTED_SCALE_Y = 12;
+
+    private void Awake()
+    {
+        holderController = GameObject.FindGameObjectWithTag("Holder").GetComponent<ColorHolderController>();
+        renderer = GetComponent<SpriteRenderer>();
+    }
     void Start()
     {
-        SetPositionViewport();
+        state = new TempHolderState(this);
+        //SetPositionViewport();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (isDragging)
+        if (state.Selected)
         {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            transform.Translate(mousePosition);
-            //Debug.Log(transform.position);
+            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, SELECTED_SCALE_X, 0.05f), Mathf.Lerp(transform.localScale.y, SELECTED_SCALE_Y, 0.05f), transform.localScale.z);
+        }
+        if (!state.Selected)
+        {
+            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, DEFAULT_SCALE_X, 0.05f), Mathf.Lerp(transform.localScale.y, DEFAULT_SCALE_Y, 0.05f),transform.localScale.z);
         }
     }
 
@@ -29,18 +43,110 @@ public class TempColorHolderController : MonoBehaviour
             new Vector3(Screen.safeArea.x + POSITION_OFFSET_PIXEL, Screen.height/2, 10));
        
     }
-
-    public void Drop()
-    {
-        SetPositionViewport();
-        isDragging = false;
-    }
-
+        
     private void SetPositionViewport()
     {
         Vector2 savebotttomLeftOffset = Camera.main.ScreenToViewportPoint(new Vector2(Screen.safeArea.x, Screen.safeArea.y));
 
         transform.position = Camera.main.ViewportToWorldPoint(
               new Vector3(0.1f + savebotttomLeftOffset.x, 0.5f, 10));
+    }
+
+    public void OnClicked()
+    {
+        if(holderController.state.Selected)
+        {
+            SpriteRenderer holderRenderer = holderController.GetComponent<SpriteRenderer>();
+            renderer.color = holderRenderer.color;
+            holderRenderer.color = holderController.defaultColor;
+            holderController.RemoveBlueprintUsages();
+            holderController.ClearBlueprints();
+        }
+        else
+        {
+            state.Selected = !state.Selected;
+            if(state.Selected)
+            {
+                HighlightBlueprints(true);
+            }
+            else
+            {
+                HighlightBlueprints(false);
+            }
+        }
+    }
+
+    private void HighlightBlueprints(bool highlight)
+    {
+        GameObject[] blueprints = GameObject.FindGameObjectsWithTag("Blueprint");
+        foreach (GameObject blueprint in blueprints)
+        {
+            BlueprintController blueprintController = blueprint.GetComponent<BlueprintController>();
+            if (!blueprintController.state.Locked && !blueprintController.state.Blocked)
+            {
+                blueprintController.state.Highlighted = highlight;
+            }
+        }
+    }
+
+    public class TempHolderState
+    {
+        private TempColorHolderController controller;
+
+        public TempHolderState(TempColorHolderController controller)
+        {
+            this.controller = controller;
+        }
+
+        private bool _selected;
+        public bool Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                if (value == true)
+                {
+                    GameObject[] blueprints = GameObject.FindGameObjectsWithTag("Blueprint");
+                    foreach (GameObject blueprint in blueprints)
+                    {
+                        BlueprintController blueprintController = blueprint.GetComponent<BlueprintController>();
+                        blueprintController.state.Highlighted = true;
+                    }
+                }
+                if (value == false)
+                {
+                    //controller.gameObject.GetComponent<Collider2D>().enabled = true;
+                    //controller.renderer.color = tempColor;
+                }
+                this._selected = value;
+                Highlighted = value;
+            }
+        }
+        private bool _highlighted;
+        public bool Highlighted
+        {
+            get
+            {
+                return _highlighted;
+            }
+            set
+            {        
+                //make glow
+                GameObject[] blueprints = GameObject.FindGameObjectsWithTag("Blueprint");
+                foreach (GameObject blueprint in blueprints)
+                {
+                    BlueprintController blueprintController = blueprint.GetComponent<BlueprintController>();
+                    blueprintController.state.Highlighted = true;
+                }
+                this._highlighted = value;
+                if (value)
+                    Debug.Log(controller.gameObject.name + "highlighted");
+                if (!value)
+                    Debug.Log(controller.gameObject.name + "not highlighted");
+            }
+        }
     }
 }

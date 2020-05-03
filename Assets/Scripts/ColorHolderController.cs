@@ -3,83 +3,144 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorHolderController : MonoBehaviour
+public class ColorHolderController : MonoBehaviour, IClickable
 {
     private SpriteRenderer renderer;
-    List<Color> colors;
-    public HashSet<string> assignableShapes;
-    public bool isDragging;
-    private Color defaultColor;
-    private const int POSITION_OFFSET_PIXEL = 200;
-
-    private void Awake()
-    {
-        if (assignableShapes == null)
-            assignableShapes = new HashSet<string>();
-    }
-
+    [SerializeField]
+    private List<GameObject> blueprints;
+    public Color defaultColor;
+    public HolderState state;
+    private const int SELECTED_SCALE = 14;    
+    private const int DEFAULT_SCALE = 10;    
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         Debug.Log(renderer);
-        colors = new List<Color>();
+        blueprints = new List<GameObject>();
         defaultColor = renderer.color;
-        SetPosition();
+        SubscribeToBlueprints();
+        state = new HolderState(this);
     }
 
-    private void SetPosition()
+    private void Update()
     {
-        float y = Camera.main.ScreenToViewportPoint(
-            new Vector2(0, Screen.safeArea.height)).y;
-        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f,y-0.15f,
-            15));
-    }
-
-    void Update()
-    {
-        if (isDragging)
+        if (state.Selected)
         {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            transform.Translate(mousePosition);
-            //Debug.Log(transform.position);
+            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, SELECTED_SCALE, 0.05f), Mathf.Lerp(transform.localScale.y, SELECTED_SCALE, 0.05f), transform.localScale.z);
+        }
+        if (!state.Selected)
+        {
+            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, DEFAULT_SCALE, 0.05f), Mathf.Lerp(transform.localScale.y, DEFAULT_SCALE, 0.05f),transform.localScale.z);
         }
     }
 
-    public void AddColorWithShape(Color color, string shape)
+    private void OnDestroy()
     {
-        if (!colors.Contains(color))
+        UnsubscribeFromBlueprints();
+    }
+
+    private void UnsubscribeFromBlueprints()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Blueprint");
+
+        foreach (GameObject gameObject in gameObjects)
         {
-            colors.Add(color);
-            assignableShapes.Add(shape);
-            UpdateColor();
+            gameObject.GetComponent<BlueprintController>().OnSelected -= AddBlueprint;
+            gameObject.GetComponent<BlueprintController>().OnDeselected -= RemoveBlueprint;
         }
     }
 
-    public void RemoveColorWithShape(Color color, string shape)
+    private void SubscribeToBlueprints()
     {
-        colors.Remove(color);
-        assignableShapes.Remove(shape);
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Blueprint");
+        BackgroundController background = GameObject.FindGameObjectWithTag("Background").GetComponent<BackgroundController>();
+
+        foreach (GameObject gameObject in gameObjects)
+        {
+            gameObject.GetComponent<BlueprintController>().OnSelected += AddBlueprint;
+            gameObject.GetComponent<BlueprintController>().OnDeselected += RemoveBlueprint;
+        }
+        background.OnSelected += ClearHolder;
+    }
+
+    private void ClearHolder()
+    {
+        state.Selected = false;
+        state.Highlighted = false;
+        renderer.color = defaultColor;
+        ClearBlueprints();
+    }
+
+    private void AddBlueprint(GameObject blueprint)
+    {
+        blueprints.Add(blueprint);
         UpdateColor();
     }
 
-    public bool FindAcceptedShape(string shape)
+    private void RemoveBlueprint(GameObject blueprint)
     {
-        return assignableShapes.Contains(shape);
+        blueprints.Remove(blueprint);
+        UpdateColor();
     }
-
+    
+          
     private void UpdateColor()
     {
-        if (colors.Count > 0)
+        if (blueprints.Count <= 1)
         {
-            Color color = colors[0];
-            for (int i = 1; i < colors.Count; i++)
-            {
-                color = ProduceNewColor(color, colors[i]);
-            }
-            renderer.color = color;
-        }
-        else
             renderer.color = defaultColor;
+            return;
+        }
+        Color initialColor = blueprints[0].GetComponent<SpriteRenderer>().color;
+        foreach (GameObject blueprint in blueprints)
+        {
+            initialColor = ProduceNewColor(initialColor, blueprint.GetComponent<SpriteRenderer>().color);
+        }
+        renderer.color = initialColor;
+    }
+
+    internal void ClearBlueprints()
+    {
+        foreach (GameObject blueprint in blueprints)
+        {
+            blueprint.GetComponent<BlueprintController>().state.Selected = false;
+            blueprint.GetComponent<BlueprintController>().state.Highlighted = false;
+        }
+        blueprints.Clear();
+    }
+
+    public void OnClicked()
+    {
+        state.Selected = !state.Selected;
+        if (blueprints.Count >=2 && state.Selected)
+        {
+            HighlightBlueprints(true);
+        }
+        else if(!state.Selected)
+        {
+            HighlightBlueprints(false);
+        }
+    }
+
+    private void HighlightBlueprints(bool highlight)
+    {
+        foreach (GameObject blueprint in blueprints)
+        {
+            BlueprintController blueprintController = blueprint.GetComponent<BlueprintController>();
+            if (!blueprintController.state.Locked && !blueprintController.state.Blocked)
+            {
+                blueprintController.state.Highlighted = highlight;
+            }
+        }
+    }
+
+    internal void RemoveBlueprintUsages()
+    {
+        foreach (GameObject blueprint in blueprints)
+        {
+            BlueprintController blueprintController = blueprint.GetComponent<BlueprintController>();
+            blueprintController.spawnAmount--;
+        }
     }
 
     private Color ProduceNewColor(Color color1, Color color2)
@@ -93,6 +154,63 @@ public class ColorHolderController : MonoBehaviour
         Color newColor = (color1 + color2) / 2;
         Debug.Log(newColor);
         return newColor;
+    }
+    public class HolderState
+    {
+        private ColorHolderController controller;
+
+        public HolderState(ColorHolderController controller)
+        {
+            this.controller = controller;
+        }
+
+        
+        private bool _selected;
+        public bool Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                if(controller.blueprints.Count >=2)
+                {
+                    foreach (GameObject blueprint in controller.blueprints)
+                    {
+                        BlueprintController blueprintController = blueprint.GetComponent<BlueprintController>();
+                        if(!blueprintController.state.Blocked && !blueprintController.state.Locked)
+                        {
+                            blueprintController.state.Highlighted = value;
+                        }
+                    }
+                }
+                GameObject tempHolder = GameObject.FindGameObjectWithTag("TempHolder");
+                if(tempHolder != null)
+                {
+                    tempHolder.GetComponent<TempColorHolderController>().state.Highlighted = value;
+                }
+                this._selected = value;
+            }
+        }
+
+        private bool _highlighted;
+        public bool Highlighted
+        {
+            get
+            {
+                return _highlighted;
+            }
+            set
+            {
+                //make glow
+                this._highlighted = value;
+                if(value)
+                    Debug.Log(controller.gameObject.name + "highlighted");
+                if (!value)
+                    Debug.Log(controller.gameObject.name + "not highlighted");
+            }
+        }
     }
 
 }

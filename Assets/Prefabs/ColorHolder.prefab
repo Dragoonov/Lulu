@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 208292721693015514}
   - component: {fileID: 198138276889234162}
   - component: {fileID: 8669206619249722200}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ColorHolder
-  m_TagString: Untagged
+  m_TagString: Holder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 208292721693015517}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.72, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b3bd4d959d220ca40a506a13874fed10, type: 3}
-  m_Color: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
+  m_Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0620ae55ddd545f4586811a5c25de1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDragging: 0
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!58 &8669206619249722200
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -109,6 +109,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.000000011920929}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.024982046
+  m_Radius: 0.037596453

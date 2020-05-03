@@ -63,20 +63,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BackgroundController.cs" />
+    <Compile Include="Assets\ConstraintController.cs" />
+    <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\BlockController.cs" />
     <Compile Include="Assets\Scripts\BlueprintController.cs" />
     <Compile Include="Assets\Scripts\ColorHolderController.cs" />
     <Compile Include="Assets\Scripts\ColorsController.cs" />
+    <Compile Include="Assets\Scripts\Constraint.cs" />
     <Compile Include="Assets\Scripts\DeviceCheck.cs" />
     <Compile Include="Assets\Scripts\GameStateController.cs" />
     <Compile Include="Assets\Scripts\HelpController.cs" />
+    <Compile Include="Assets\Scripts\IClickable.cs" />
     <Compile Include="Assets\Scripts\InitializeAdsScript.cs" />
+    <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\LevelChooserController.cs" />
     <Compile Include="Assets\Scripts\LevelDataHolder.cs" />
     <Compile Include="Assets\Scripts\LevelsMenuController.cs" />
     <Compile Include="Assets\Scripts\LockController.cs" />
     <Compile Include="Assets\Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\ShapeController.cs" />
+    <Compile Include="Assets\Scripts\State.cs" />
     <Compile Include="Assets\Scripts\TempColorHolderController.cs" />
     <Compile Include="Assets\Scripts\TransformDeepChildExtension.cs" />
     <Compile Include="Assets\Scripts\TutorialController.cs" />

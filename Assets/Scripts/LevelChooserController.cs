@@ -11,10 +11,10 @@ public class LevelChooserController : MonoBehaviour
     GameObject objUnmute;
     GameObject objMute;
 
-    public Sprite triangle;
-    public Sprite circle;
-    public Sprite square;
-    public Sprite pentagon;
+    public Sprite bottomLeftQuarter;
+    public Sprite topLeftQuarter;
+    public Sprite topRightQuarter;
+    public Sprite bottomRightQuarter;
 
     int currentLevel;
 
@@ -23,6 +23,7 @@ public class LevelChooserController : MonoBehaviour
         controller = GameObject.Find("GameStateController").GetComponent<GameStateController>();
         objUnmute = GameObject.Find("UnmuteImage");
         objMute = GameObject.Find("MuteImage");
+        bottomLeftQuarter
         if (objMute != null && objUnmute != null)
         {
             objUnmute.SetActive(!controller.muted);
@@ -58,7 +59,7 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetTopRightBlueprint(Color.blue);
             LevelDataHolder.SetBottomLeftBlueprint(Color.yellow);
             LevelDataHolder.SetBottomRightBlueprint(Color.red);
-            LevelDataHolder.SetGoal(triangle, (Color.yellow + Color.green)/2);
+            LevelDataHolder.SetGoal(bottomLeftQuarter, (Color.yellow + Color.green)/2);
         }
         if (level == 2)
         {
@@ -66,7 +67,7 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetTopRightBlueprint(Color.green);
             LevelDataHolder.SetBottomLeftBlueprint(Color.yellow);
             LevelDataHolder.SetBottomRightBlueprint(Color.blue);
-            LevelDataHolder.SetGoal(pentagon, (Color.blue + Color.green)/2);
+            LevelDataHolder.SetGoal(bottomRightQuarter, (Color.blue + Color.green)/2);
         }
         //Tutorial limit
         if (level == 3)
@@ -76,7 +77,7 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetTopRightBlueprint(Color.green);
             LevelDataHolder.SetBottomLeftBlueprint(Color.yellow);
             LevelDataHolder.SetBottomRightBlueprint(Color.blue);
-            LevelDataHolder.SetGoal(circle, goal);
+            LevelDataHolder.SetGoal(topLeftQuarter, goal);
         }
         //Tutorial lock
         if (level == 4)
@@ -87,10 +88,10 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetBottomLeftBlueprint(
                 colorOwn: Color.yellow,
                 effect: EffectType.LOCK,
-                sprite: circle,
+                sprite: topLeftQuarter,
                 color: (Color.red + Color.blue)/2);
             LevelDataHolder.SetBottomRightBlueprint(Color.blue);
-            LevelDataHolder.SetGoal(triangle, goal);
+            LevelDataHolder.SetGoal(bottomLeftQuarter, goal);
         }
         //Tutorial block
         if (level == 5) 
@@ -101,14 +102,14 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetBottomLeftBlueprint(
                 colorOwn: Color.yellow,
                 effect: EffectType.LOCK,
-                sprite: square,
+                sprite: topRightQuarter,
                 color: (Color.red + Color.green) / 2);
             LevelDataHolder.SetBottomRightBlueprint(
                 colorOwn: Color.blue,
                 effect: EffectType.BLOCK,
-                sprite: triangle,
+                sprite: bottomLeftQuarter,
                 color: (Color.yellow + Color.red) / 2);
-            LevelDataHolder.SetGoal(circle, goal);
+            LevelDataHolder.SetGoal(topLeftQuarter, goal);
         }
         if (level == 6)
         {
@@ -117,15 +118,15 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetTopRightBlueprint(
                 colorOwn: Color.blue,
                 effect: EffectType.BLOCK,
-                sprite: triangle,
+                sprite: bottomLeftQuarter,
                 color: (((Color.green + Color.red) / 2) + Color.green) / 2);
             LevelDataHolder.SetBottomLeftBlueprint(Color.green);
             LevelDataHolder.SetBottomRightBlueprint(
                 colorOwn: Color.magenta,
                 effect: EffectType.BLOCK,
-                sprite: triangle,
+                sprite: bottomLeftQuarter,
                 color: (Color.blue + ((((Color.green + Color.red) / 2) + Color.green) / 2))/2);
-            LevelDataHolder.SetGoal(pentagon, goal);
+            LevelDataHolder.SetGoal(bottomRightQuarter, goal);
         }
         //Tutorial tempHolder
         if (level == 7)
@@ -137,7 +138,7 @@ public class LevelChooserController : MonoBehaviour
                 colorOwn: Color.yellow);
             LevelDataHolder.SetBottomRightBlueprint(
                 colorOwn: Color.blue);
-            LevelDataHolder.SetGoal(triangle, goal);
+            LevelDataHolder.SetGoal(bottomLeftQuarter, goal);
             LevelDataHolder.SetTempHolderData(Color.gray);
         }
 
@@ -150,7 +151,7 @@ public class LevelChooserController : MonoBehaviour
                 colorOwn: Color.yellow);
             LevelDataHolder.SetBottomRightBlueprint(
                 colorOwn: Color.green);
-            LevelDataHolder.SetGoal(pentagon, goal);
+            LevelDataHolder.SetGoal(bottomRightQuarter, goal);
             LevelDataHolder.SetTempHolderData(Color.gray);
         }
 
@@ -164,9 +165,9 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetBottomRightBlueprint(
                 colorOwn: Color.blue,
                 effect: EffectType.BLOCK,
-                sprite: circle,
+                sprite: topLeftQuarter,
                 color:(Color.yellow + Color.magenta)/2);
-            LevelDataHolder.SetGoal(pentagon, goal);
+            LevelDataHolder.SetGoal(bottomRightQuarter, goal);
             LevelDataHolder.SetTempHolderData(Color.yellow);
         }
         if (level == 10)
@@ -175,14 +176,14 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetTopLeftBlueprint(
                 Color.magenta,
                 effect: EffectType.BLOCK,
-                sprite: pentagon,
+                sprite: bottomRightQuarter,
                 color: (Color.yellow + Color.magenta) / 2);
             LevelDataHolder.SetTopRightBlueprint(Color.magenta);
             LevelDataHolder.SetBottomLeftBlueprint(
                 colorOwn: Color.magenta);
             LevelDataHolder.SetBottomRightBlueprint(
                 colorOwn: Color.magenta);
-            LevelDataHolder.SetGoal(circle, goal);
+            LevelDataHolder.SetGoal(topLeftQuarter, goal);
             LevelDataHolder.SetTempHolderData(Color.yellow);
         }
         if (level == 11)
@@ -191,28 +192,28 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetTopLeftBlueprint(
                 colorOwn: Color.red,
                 effect: EffectType.LOCK,
-                sprite: triangle,
+                sprite: bottomLeftQuarter,
                 color: Color.magenta
                 );
             LevelDataHolder.SetTopRightBlueprint(
                 colorOwn: Color.blue,
                 effect: EffectType.BLOCK,
-                sprite: pentagon,
+                sprite: bottomRightQuarter,
                 color: Color.magenta
                 );
             LevelDataHolder.SetBottomLeftBlueprint(
                 colorOwn: Color.yellow,
                 effect: EffectType.BLOCK,
-                sprite: circle,
+                sprite: topLeftQuarter,
                 color: Color.magenta
                 );
             LevelDataHolder.SetBottomRightBlueprint(
                 colorOwn: Color.green,
                 effect: EffectType.BLOCK,
-                sprite: square,
+                sprite: topRightQuarter,
                 color: Color.magenta
                 );
-            LevelDataHolder.SetGoal(circle, goal);
+            LevelDataHolder.SetGoal(topLeftQuarter, goal);
             LevelDataHolder.SetTempHolderData(Color.blue);
         }
         if (level == 12)
@@ -231,10 +232,10 @@ public class LevelChooserController : MonoBehaviour
                 colorOwn: Color.blue,
                 limit: 1,
                 effect: EffectType.BLOCK,
-                sprite: square,
+                sprite: topRightQuarter,
                 color: (Color.red + Color.yellow)/2
                 );
-            LevelDataHolder.SetGoal(pentagon, goal);
+            LevelDataHolder.SetGoal(bottomRightQuarter, goal);
         }
         if (level == 13)
         {
@@ -252,10 +253,10 @@ public class LevelChooserController : MonoBehaviour
                 colorOwn: Color.blue,
                 limit: 2,
                 effect: EffectType.BLOCK,
-                sprite: square,
+                sprite: topRightQuarter,
                 color: (((Color.red + Color.green) / 2) + Color.yellow)/2
                 );
-            LevelDataHolder.SetGoal(pentagon, goal);
+            LevelDataHolder.SetGoal(bottomRightQuarter, goal);
             LevelDataHolder.SetTempHolderData(Color.cyan);
         }
         if (level == 14)
@@ -265,7 +266,7 @@ public class LevelChooserController : MonoBehaviour
                 colorOwn: Color.cyan,
                 limit: 2,
                 effect: EffectType.BLOCK,
-                sprite: pentagon,
+                sprite: bottomRightQuarter,
                 color: (((Color.blue + Color.green) / 2) + Color.red) / 2
                 );
             LevelDataHolder.SetTopRightBlueprint(
@@ -282,7 +283,7 @@ public class LevelChooserController : MonoBehaviour
                // sprite: square,
                // color: (((Color.red + Color.green) / 2) + Color.yellow) / 2
                 );
-            LevelDataHolder.SetGoal(circle, goal);
+            LevelDataHolder.SetGoal(topLeftQuarter, goal);
             LevelDataHolder.SetTempHolderData(Color.magenta);
         }
         if (level == 15)
@@ -292,14 +293,14 @@ public class LevelChooserController : MonoBehaviour
                 colorOwn: Color.red,
                // limit: 2,
                 effect: EffectType.LOCK,
-                sprite: triangle,
+                sprite: bottomLeftQuarter,
                 color: (((Color.blue + Color.yellow) / 2) + Color.cyan) / 2
                 );
             LevelDataHolder.SetTopRightBlueprint(
                 colorOwn: Color.green,
                 //limit: 2
                 effect: EffectType.BLOCK,
-                sprite: pentagon,
+                sprite: bottomRightQuarter,
                 color: (Color.red + Color.cyan) / 2
                 );
             LevelDataHolder.SetBottomLeftBlueprint(
@@ -312,7 +313,7 @@ public class LevelChooserController : MonoBehaviour
                 // sprite: square,
                 // color: (((Color.red + Color.green) / 2) + Color.yellow) / 2
                 );
-            LevelDataHolder.SetGoal(square, goal);
+            LevelDataHolder.SetGoal(topRightQuarter, goal);
             LevelDataHolder.SetTempHolderData(Color.cyan);
         }
         if (level == 16)
@@ -329,14 +330,14 @@ public class LevelChooserController : MonoBehaviour
                 colorOwn: Color.blue,
                 //limit: 2
                 effect: EffectType.BLOCK,
-                sprite: circle,
+                sprite: topLeftQuarter,
                 color: (Color.yellow + Color.cyan) / 2
                 );
             LevelDataHolder.SetBottomLeftBlueprint(
                 colorOwn: Color.yellow,
                 //limit: 2
                 effect: EffectType.LOCK,
-                sprite: pentagon,
+                sprite: bottomRightQuarter,
                 color: (((Color.magenta + Color.red) / 2) + Color.cyan) / 2
                 );
             LevelDataHolder.SetBottomRightBlueprint(
@@ -346,7 +347,7 @@ public class LevelChooserController : MonoBehaviour
                 // sprite: square,
                 // color: (((Color.red + Color.green) / 2) + Color.yellow) / 2
                 );
-            LevelDataHolder.SetGoal(square, goal);
+            LevelDataHolder.SetGoal(topRightQuarter, goal);
             LevelDataHolder.SetTempHolderData(Color.cyan);
         }
         if (level == 17)
@@ -363,16 +364,16 @@ public class LevelChooserController : MonoBehaviour
                 colorOwn: Color.cyan,
                 limit: 1,
                 effect: EffectType.LOCK,
-                sprite: pentagon,
+                sprite: bottomRightQuarter,
                 color: Color.magenta
                 );
             LevelDataHolder.SetBottomRightBlueprint(
                 colorOwn: Color.blue,
                 effect: EffectType.BLOCK,
-                sprite: square,
+                sprite: topRightQuarter,
                 color: ((Color.red + Color.yellow) / 2 + Color.yellow) / 2
                 );
-            LevelDataHolder.SetGoal(pentagon, goal);
+            LevelDataHolder.SetGoal(bottomRightQuarter, goal);
             LevelDataHolder.SetTempHolderData(Color.gray);
         }
         if (level == 18)
@@ -381,7 +382,7 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetTopLeftBlueprint(
                 colorOwn: Color.green,
                 effect: EffectType.LOCK,
-                sprite: circle,
+                sprite: topLeftQuarter,
                 color: (Color.yellow + Color.magenta) / 2
                 );
             LevelDataHolder.SetTopRightBlueprint(
@@ -389,16 +390,16 @@ public class LevelChooserController : MonoBehaviour
                 );
             LevelDataHolder.SetBottomLeftBlueprint(
                 colorOwn: Color.magenta,
-                sprite: pentagon,
+                sprite: bottomRightQuarter,
                 color: Color.magenta
                 );
             LevelDataHolder.SetBottomRightBlueprint(
                 colorOwn: Color.red,
                 effect: EffectType.BLOCK,
-                sprite: circle,
+                sprite: topLeftQuarter,
                 color: ((Color.magenta + Color.yellow) / 2 + Color.magenta) / 2
                 );
-            LevelDataHolder.SetGoal(square, goal);
+            LevelDataHolder.SetGoal(topRightQuarter, goal);
             LevelDataHolder.SetTempHolderData(Color.gray);
         }
         if (level == 19)
@@ -416,7 +417,7 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetBottomRightBlueprint(
                 colorOwn: Color.blue
                 );
-            LevelDataHolder.SetGoal(pentagon, goal);
+            LevelDataHolder.SetGoal(bottomRightQuarter, goal);
         }
         if (level == 20)
         {
@@ -433,7 +434,7 @@ public class LevelChooserController : MonoBehaviour
             LevelDataHolder.SetBottomRightBlueprint(
                 colorOwn: Color.blue
                 );
-            LevelDataHolder.SetGoal(triangle, goal);
+            LevelDataHolder.SetGoal(bottomLeftQuarter, goal);
         }
         controller.PlayTapSound();
         controller.ShowAd();

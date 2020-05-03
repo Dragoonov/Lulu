@@ -4,87 +4,57 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class BlueprintController : MonoBehaviour
+public class BlueprintController : MonoBehaviour, IClickable
 {
-    public GameObject shape;
     public SpriteRenderer renderer;
     public Color tempColor;
     public GameObject lockObject;
     public GameObject blockObject;
     public TextMeshProUGUI spawnAmountObj;
     public int spawnAmount;
-    private const int POSITION_OFFSET_PIXEL = 100;
+    public BlueprintState state;
+    private ColorHolderController holder;
+    private TempColorHolderController tempHolder;
 
-    [SerializeField]
-    private bool _blocked;
-    public bool Blocked
-    {
-        get
-        {
-            return _blocked;
-        }
-        set
-        {
-            if (_blocked != value)
-            {
-                _blocked = value;
-                if (_blocked)
-                    Block();
-                else
-                    Unblock();
-            }
-        }
-    }
+    public delegate void SelectAction(GameObject blueprint);
+    public event SelectAction OnSelected;
+    public event SelectAction OnDeselected;
 
-    [SerializeField]
-    private bool _locked;
-    public bool Locked
-    {
-        get
-        {
-            return _locked;
-        }
-        set
-        {
-            if(_locked != value)
-            {
-                _locked = value;
-                if (_locked)
-                    Lock();
-                else
-                    Unlock();
-            }
-        }
-    }
+    private const int DEFAULT_SCALE = 6;
+    private const int SELECTED_SCALE = 8;
 
     private void Awake()
     {
         blockObject = transform.Find("Block").gameObject;
         lockObject = transform.Find("Lock").gameObject;
         renderer = GetComponent<SpriteRenderer>();
+        state = new BlueprintState(this);
+        holder = GameObject.FindGameObjectWithTag("Holder").GetComponent<ColorHolderController>();
+        tempHolder = GameObject.FindGameObjectWithTag("TempHolder").GetComponent<TempColorHolderController>();
     }
 
     void Start()
     {
         spawnAmountObj.text = "";
-        SetPositionViewport();
-        //SetPositionPixel();
         tempColor = renderer.color;
-        blockObject.SetActive(false);
-        lockObject.SetActive(false);
-        if (_locked)
-            Lock();
-        if (_blocked)
-            Block();
+        state.Blocked = false;
+        state.Locked = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        UpdateSpawnAmount();
+        if(state.Selected)
+        {
+            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, SELECTED_SCALE, 0.05f), Mathf.Lerp(transform.localScale.y, SELECTED_SCALE, 0.05f),transform.localScale.z);
+        }
+        if (!state.Selected)
+        {
+            transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, DEFAULT_SCALE, 0.05f), Mathf.Lerp(transform.localScale.y, DEFAULT_SCALE, 0.05f), transform.localScale.z);
+        }
     }
 
-    private void UpdateSpawnAmount()
+
+    public void UpdateSpawnAmount()
     {
         if(spawnAmount > 50)
         {
@@ -93,132 +63,180 @@ public class BlueprintController : MonoBehaviour
         spawnAmountObj.text = spawnAmount.ToString();
     }
 
-    private void SetPositionPixel()
-    {
-        if(shape.name == "triangle")
-        {
-            transform.position = Camera.main.ScreenToWorldPoint(
-                new Vector3(Screen.safeArea.x + POSITION_OFFSET_PIXEL, Screen.safeArea.y + POSITION_OFFSET_PIXEL, 10));
-        }
-        if (shape.name == "circle")
-        {
-            transform.position = Camera.main.ScreenToWorldPoint(
-                new Vector3(Screen.safeArea.x + POSITION_OFFSET_PIXEL,
-                Screen.safeArea.height - POSITION_OFFSET_PIXEL, 10));
-        }
-        if (shape.name == "square")
-        {
-            transform.position = Camera.main.ScreenToWorldPoint(
-                new Vector3(Screen.safeArea.width - POSITION_OFFSET_PIXEL,
-                Screen.safeArea.height - POSITION_OFFSET_PIXEL, 10));
-        }
-        if (shape.name == "pentagon")
-        {
-            transform.position = Camera.main.ScreenToWorldPoint(
-                new Vector3(Screen.safeArea.width - POSITION_OFFSET_PIXEL,
-                POSITION_OFFSET_PIXEL + Screen.safeArea.y, 10));
-        }
-    }
-
-    private void SetPositionViewport()
-    {
-        Vector2 savebotttomLeftOffset = Camera.main.ScreenToViewportPoint(new Vector2(Screen.safeArea.x, Screen.safeArea.y));
-        Vector2 saveBottomRightOffset = Camera.main.ScreenToViewportPoint(
-            new Vector2(Camera.main.pixelWidth-Screen.safeArea.width, Screen.safeArea.y));
-        Vector2 savetopLeftOffset = Camera.main.ScreenToViewportPoint(
-            new Vector2(Screen.safeArea.x, Camera.main.pixelHeight - Screen.safeArea.height));
-        Vector2 savetopRightOffset = Camera.main.ScreenToViewportPoint(
-            new Vector2(Camera.main.pixelWidth-Screen.safeArea.width, Camera.main.pixelHeight - Screen.safeArea.height));
-
-        if (shape.name == "triangle")
-        {
-            transform.position = Camera.main.ViewportToWorldPoint(
-                new Vector3(0.1f+savebotttomLeftOffset.x, 0.05f + savebotttomLeftOffset.y, 10));
-        }
-        if (shape.name == "circle")
-        {
-            transform.position = Camera.main.ViewportToWorldPoint(
-                new Vector3(0.1f + savetopLeftOffset.x, 0.95f - savetopLeftOffset.y, 10));
-        }
-        if (shape.name == "square")
-        {
-            transform.position = Camera.main.ViewportToWorldPoint(
-                new Vector3(0.9f - savetopRightOffset.x, 0.95f - savetopRightOffset.y, 10));
-        }
-        if (shape.name == "pentagon")
-        {
-            transform.position = Camera.main.ViewportToWorldPoint(
-                new Vector3(0.9f - saveBottomRightOffset.x, 0.05f + saveBottomRightOffset.y, 10));
-        }
-    }
-
-    public void CreateShape(Vector2 position, int fingerId)
-    {
-        if(!Blocked && spawnAmount > 0)
-        {
-            GameObject clone = Instantiate(shape, position, Quaternion.identity);
-            clone.tag = "Spawned";
-            clone.GetComponent<SpriteRenderer>().color = renderer.color;
-            clone.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
-            clone.GetComponent<ShapeController>().fingerId = fingerId;
-            spawnAmount--;
-        }
-    }
-
-
-    public string GetShapeName()
-    {
-        return shape.name;
-    }
-
-    public void DisableAssigning()
-    {
-        tempColor = renderer.color;
-        renderer.color = Color.gray;
-        GetComponent<Collider2D>().enabled = false;
-    }
-
-    public void EnableAssigning()
-    {
-        if(!Blocked)
-        {
-            GetComponent<Collider2D>().enabled = true;
-        }
-        renderer.color = tempColor;
-    }
-
-    private void Lock()
-    {
-        lockObject.SetActive(true);
-    }
-
-
-    private void Unlock()
-    {
-        lockObject.SetActive(false);
-    }
-
-    private void Block()
-    {
-        GetComponent<Collider2D>().enabled = false;
-        blockObject.SetActive(true);
-    }
-
-    private void Unblock()
-    {
-        GetComponent<Collider2D>().enabled = true;
-        blockObject.SetActive(false);
-    }
-
     public void Lock(Sprite sprite, Color color)
     {
-        Locked = true;
+        state.Locked = true;
         lockObject.GetComponent<LockController>().SetShape(sprite, color);
     }
 
     public void Block(Sprite sprite, Color color)
     {
-        Blocked = true;
+        state.Blocked = true;
         blockObject.GetComponent<BlockController>().SetShape(sprite, color);
+    } 
+
+    public void OnClicked()
+    {
+        if(holder.state.Selected)
+        {
+            if(state.Highlighted)
+            {
+                SpriteRenderer holderRenderer = holder.GetComponent<SpriteRenderer>();
+                renderer.color = holderRenderer.color;
+                ColorHolderController holderController = holder.GetComponent<ColorHolderController>();
+                holderRenderer.color = holderController.defaultColor;
+                holder.state.Selected = false;
+                holderController.RemoveBlueprintUsages();
+                holderController.ClearBlueprints();
+            }
+        }
+        else if (tempHolder.isActiveAndEnabled && tempHolder.state.Selected)
+        {
+            SpriteRenderer holderRenderer = tempHolder.GetComponent<SpriteRenderer>();
+            renderer.color = holderRenderer.color;
+            Destroy(tempHolder);
+            tempHolder = null;
+        }
+        else
+        {
+            state.Selected = !state.Selected;
+            if(state.Selected)
+            {
+                OnSelected(gameObject);
+            }
+            else
+            {
+                OnDeselected(gameObject);
+            }
+        }
+    }
+
+    public class BlueprintState
+    {
+        private BlueprintController controller;
+
+        private Color tempColor = Color.green;
+        public BlueprintState(BlueprintController controller)
+        {
+            this.controller = controller;
+        }
+
+        private bool _locked;
+        public bool Locked
+        {
+            get
+            {
+                return _locked;
+            }
+            set
+            {
+                if (Blocked)
+                {
+                    return;
+                }
+                if(value == true)
+                {
+                    controller.lockObject.SetActive(true);
+                }
+                if (value == false)
+                {
+                    controller.lockObject.SetActive(false);
+                }
+                this._locked = value;
+            }
+        }
+
+        private bool _blocked;
+        public bool Blocked
+        {
+            get
+            {
+                return _blocked;
+            }
+            set
+            {
+                if (value == true)
+                {
+                    controller.blockObject.SetActive(true);
+                }
+                if (value == false)
+                {
+                    controller.blockObject.SetActive(false);
+                }
+                this._blocked = value;
+            }
+        }
+
+        private bool _selected;
+        public bool Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                if(Blocked)
+                {
+                    return;
+                }
+                this._selected = value;
+            }
+        }
+
+        private bool _disabled;
+        public bool Disabled
+        {
+            get
+            {
+                return _disabled;
+            }
+            set
+            {
+                if (Blocked)
+                {
+                    return;
+                }
+                if (value == true)
+                {
+                    tempColor = controller.renderer.color;
+                    controller.renderer.color = Color.gray;
+                    controller.gameObject.GetComponent<Collider2D>().enabled = false;
+
+                }
+                if (value == false)
+                {
+                    controller.gameObject.GetComponent<Collider2D>().enabled = true;
+                    controller.renderer.color = tempColor;
+                }
+                this._selected = value;
+            }
+        }
+
+        private bool _highlighted;
+        public bool Highlighted
+        {
+            get
+            {
+                return _highlighted;
+            }
+            set
+            {
+                if (Blocked)
+                {
+                    return;
+                }
+                if (value)
+                {
+                    Debug.Log(controller.gameObject.name + "highlighted");
+                }
+                if (!value)
+                {
+                    Debug.Log(controller.gameObject.name + "not highlighted");
+                }
+                this._highlighted = value;
+            }
+        }
+
     }
 }

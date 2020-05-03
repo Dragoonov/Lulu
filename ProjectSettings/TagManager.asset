@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Spawned
+  - Blueprint
+  - Holder
+  - TempHolder
+  - Background
   layers:
   - Default
   - TransparentFX

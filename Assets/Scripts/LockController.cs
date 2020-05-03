@@ -36,7 +36,7 @@ public class LockController : MonoBehaviour
                 desiredShape.transform.localScale.x > 30 &&
                 desiredShape.GetComponent<SpriteRenderer>().color == targetColor)
             {
-                parent.Locked = false;
+                parent.state.Locked = false;
                 break;
             }
         }

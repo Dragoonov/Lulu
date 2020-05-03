@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ShapeController : MonoBehaviour
 {
-    bool rising;
+    /*bool rising;
     private float scaleUpFactor = 100.3f;
     private float scaleDownFactor = 25f;
     Color currentColor;
@@ -108,5 +108,5 @@ public class ShapeController : MonoBehaviour
             colorHolder.AddColorWithShape(currentColor, gameObject.name);
             colliding = true;
         }
-    }
+    }*/
 }

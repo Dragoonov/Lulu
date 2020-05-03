@@ -15,10 +15,6 @@ public class BlockController : MonoBehaviour
         unblockShape = transform.Find("UnblockShape").gameObject;
         targetName = unblockShape.GetComponent<SpriteRenderer>().sprite.name;
     }
-    void Start()
-    {
-        
-    }
 
     public void SetShape(Sprite sprite, Color color)
     {
@@ -40,7 +36,7 @@ public class BlockController : MonoBehaviour
                 desiredShape.transform.localScale.x > 30 &&
                 desiredShape.GetComponent<SpriteRenderer>().color == targetColor)
             {
-                parent.Blocked = false;
+                parent.state.Blocked = false;
                 break;
             }
         }

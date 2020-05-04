@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Advertisements;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelChooserController : MonoBehaviour
@@ -23,7 +20,6 @@ public class LevelChooserController : MonoBehaviour
         controller = GameObject.Find("GameStateController").GetComponent<GameStateController>();
         objUnmute = GameObject.Find("UnmuteImage");
         objMute = GameObject.Find("MuteImage");
-        bottomLeftQuarter
         if (objMute != null && objUnmute != null)
         {
             objUnmute.SetActive(!controller.muted);

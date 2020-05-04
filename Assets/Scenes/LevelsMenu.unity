@@ -347,6 +347,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelsMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 3941690370343366501, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
+        type: 3}
+      propertyPath: bottomLeftQuarter
+      value: 
+      objectReference: {fileID: 21300000, guid: 2c8fbeb236eb34f2b9bde4b5ba6e432c,
+        type: 3}
+    - target: {fileID: 3941690370343366501, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
+        type: 3}
+      propertyPath: bottomRightQuarter
+      value: 
+      objectReference: {fileID: 21300000, guid: 833bf53d15b9f47648a506f831d80a66,
+        type: 3}
+    - target: {fileID: 3941690370343366501, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
+        type: 3}
+      propertyPath: topLeftQuarter
+      value: 
+      objectReference: {fileID: 21300000, guid: 9033a202713977243a7c7ff9e94da5d8,
+        type: 3}
+    - target: {fileID: 3941690370343366501, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
+        type: 3}
+      propertyPath: topRightQuarter
+      value: 
+      objectReference: {fileID: 21300000, guid: eb534d063f46a471787dc8e5f4f0e807,
+        type: 3}
     - target: {fileID: 3941690370343366502, guid: ae6bf74cdab9af04e923ea78dbadcbc1,
         type: 3}
       propertyPath: m_LocalPosition.x

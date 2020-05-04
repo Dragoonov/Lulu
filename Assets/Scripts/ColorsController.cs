@@ -17,10 +17,9 @@ public class ColorsController : MonoBehaviour
     public GameObject helpModal;
     public GameObject finishModal;
     public Image goal;
+    public Image goalOnMainScreen;
     public int level;
     public TempColorHolderController tempColorHolder;
-
-    GameObject holderCopy;
     public bool paused;
 
     private void Awake()
@@ -30,12 +29,15 @@ public class ColorsController : MonoBehaviour
 
     private void Start()
     {
+        //goalOnMainScreen.color = goal.color;
         blueprints = new List<GameObject>() { 
             topLeftBlueprint.gameObject, 
             topRightBlueprint.gameObject,
             bottomLeftBlueprint.gameObject,
             bottomRightBlueprint.gameObject };
         LevelDataHolder.InjectData(this);
+        goalOnMainScreen.color = goal.color;
+        goalOnMainScreen.sprite = goal.sprite;
         if(level > stateController.LastLevel)
         {
             stateController.LastLevel = level;

@@ -110,6 +110,8 @@ public class LevelDataHolder
         {
             controller.goal.color = goal.color;
             controller.goal.sprite = goal.sprite;
+            controller.goalOnMainScreen.color = goal.color;
+            controller.goalOnMainScreen.sprite = goal.sprite;
         }
         if (tempHolderData != null)
         {

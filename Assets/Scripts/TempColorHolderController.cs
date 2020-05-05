@@ -9,10 +9,10 @@ public class TempColorHolderController : MonoBehaviour, IClickable
     public TempHolderState state;
     private ColorHolderController holderController;
     private SpriteRenderer renderer;
-    private const float SELECTED_SCALE_X = 17;
+    private const float SELECTED_SCALE_X = 19;
     private const float DEFAULT_SCALE_X = 15;
     private const float DEFAULT_SCALE_Y = 10;
-    private const float SELECTED_SCALE_Y = 12;
+    private const float SELECTED_SCALE_Y = 14;
 
     private void Awake()
     {
@@ -134,13 +134,6 @@ public class TempColorHolderController : MonoBehaviour, IClickable
             }
             set
             {        
-                //make glow
-                GameObject[] blueprints = GameObject.FindGameObjectsWithTag("Blueprint");
-                foreach (GameObject blueprint in blueprints)
-                {
-                    BlueprintController blueprintController = blueprint.GetComponent<BlueprintController>();
-                    blueprintController.state.Highlighted = true;
-                }
                 this._highlighted = value;
                 if (value)
                     Debug.Log(controller.gameObject.name + "highlighted");

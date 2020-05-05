@@ -31,14 +31,17 @@ public class BlueprintController : MonoBehaviour, IClickable
         state = new BlueprintState(this);
         holder = GameObject.FindGameObjectWithTag("Holder").GetComponent<ColorHolderController>();
         tempHolder = GameObject.FindGameObjectWithTag("TempHolder").GetComponent<TempColorHolderController>();
-    }
-
-    void Start()
-    {
         spawnAmountObj.text = "";
         tempColor = renderer.color;
         state.Blocked = false;
         state.Locked = false;
+        state.Highlighted = false;
+        state.Selected = false;
+        state.Disabled = false;
+    }
+
+    void Start()
+    {
     }
 
     private void Update()
@@ -90,11 +93,11 @@ public class BlueprintController : MonoBehaviour, IClickable
                 holderController.ClearBlueprints();
             }
         }
-        else if (tempHolder.isActiveAndEnabled && tempHolder.state.Selected)
+        else if (tempHolder != null && tempHolder.isActiveAndEnabled && tempHolder.state.Selected)
         {
             SpriteRenderer holderRenderer = tempHolder.GetComponent<SpriteRenderer>();
             renderer.color = holderRenderer.color;
-            Destroy(tempHolder);
+            Destroy(tempHolder.gameObject);
             tempHolder = null;
         }
         else

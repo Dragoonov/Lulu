@@ -19,7 +19,7 @@ public class BackgroundController : MonoBehaviour, IClickable
             blueprintController.state.Selected = false;
             blueprintController.state.Highlighted = false;
         }
-        if(tempHolder.state != null)
+        if(tempHolder != null && tempHolder.state != null)
         {
             tempHolder.state.Selected = false;
             tempHolder.state.Highlighted = false;

@@ -186,7 +186,7 @@ public class ColorHolderController : MonoBehaviour, IClickable
                     }
                 }
                 GameObject tempHolder = GameObject.FindGameObjectWithTag("TempHolder");
-                if(tempHolder != null)
+                if(tempHolder != null && tempHolder.activeInHierarchy)
                 {
                     tempHolder.GetComponent<TempColorHolderController>().state.Highlighted = value;
                 }

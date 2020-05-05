@@ -36,8 +36,6 @@ public class ColorsController : MonoBehaviour
             bottomLeftBlueprint.gameObject,
             bottomRightBlueprint.gameObject };
         LevelDataHolder.InjectData(this);
-        goalOnMainScreen.color = goal.color;
-        goalOnMainScreen.sprite = goal.sprite;
         if(level > stateController.LastLevel)
         {
             stateController.LastLevel = level;

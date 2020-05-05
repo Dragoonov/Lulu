@@ -8,12 +8,14 @@ public class BlockController : MonoBehaviour
     GameObject unblockShape;
     string targetName;
     Color targetColor;
+    GameObject[] desiredShapes;
 
     private void Awake()
     {
         parent = transform.parent.gameObject.GetComponent<BlueprintController>();
         unblockShape = transform.Find("UnblockShape").gameObject;
         targetName = unblockShape.GetComponent<SpriteRenderer>().sprite.name;
+        desiredShapes = GameObject.FindGameObjectsWithTag("Blueprint");
     }
 
     public void SetShape(Sprite sprite, Color color)
@@ -28,12 +30,10 @@ public class BlockController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject[] desiredShapes = GameObject.FindGameObjectsWithTag("Spawned");
         foreach (GameObject desiredShape in desiredShapes)
         {
             if (desiredShape != null &&
-                desiredShape.name == targetName + "(Clone)" &&
-                desiredShape.transform.localScale.x > 30 &&
+                desiredShape.name == targetName &&
                 desiredShape.GetComponent<SpriteRenderer>().color == targetColor)
             {
                 parent.state.Blocked = false;

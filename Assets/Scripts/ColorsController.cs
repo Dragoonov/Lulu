@@ -60,7 +60,8 @@ public class ColorsController : MonoBehaviour
         foreach(GameObject blueprint in blueprints)
         {
             if(ColorMatched(blueprint.GetComponent<SpriteRenderer>().color) &&
-                blueprint.name.Contains(goal.sprite.name))
+                blueprint.name.Contains(goal.sprite.name) &&
+                !blueprint.GetComponent<BlueprintController>().state.Blocked)
             {
                 Pause();
                 OpenFinishModal();

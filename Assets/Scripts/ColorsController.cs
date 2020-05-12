@@ -49,8 +49,8 @@ public class ColorsController : MonoBehaviour
         if (!paused)
         {
             CheckIfGoalMatched();
-            InputManager.HandleTouch();
-            //HandleMouse();
+            //InputManager.HandleTouch();
+            InputManager.HandleMouse();
         }
     }
 

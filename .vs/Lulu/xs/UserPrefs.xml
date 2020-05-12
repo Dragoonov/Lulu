@@ -1,17 +1,14 @@
 ﻿<Properties StartupConfiguration="{EAB36060-8F84-DFDD-C717-233E3FF7EA9B}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TempColorHolderController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BlueprintController.cs">
     <Files>
-      <File FileName="Assets/Scripts/LevelChooserController.cs" Line="62" Column="52" />
-      <File FileName="Assets/Scripts/LevelDataHolder.cs" />
-      <File FileName="Assets/Scripts/ColorsController.cs" />
-      <File FileName="Assets/Scripts/GameStateController.cs" />
-      <File FileName="Assets/Scripts/LevelsMenuController.cs" />
-      <File FileName="Assets/Scripts/ColorHolderController.cs" />
-      <File FileName="Assets/Scripts/BlueprintController.cs" />
-      <File FileName="Assets/Scripts/TempColorHolderController.cs" Line="12" Column="46" />
-      <File FileName="Assets/BackgroundController.cs" />
-      <File FileName="Assets/Scripts/LockController.cs" />
-      <File FileName="Assets/Scripts/BlockController.cs" />
+      <File FileName="Assets/Scripts/LevelChooserController.cs" Line="65" Column="1" />
+      <File FileName="Assets/Scripts/LevelDataHolder.cs" Line="109" Column="1" />
+      <File FileName="Assets/Scripts/ColorsController.cs" Line="52" Column="15" />
+      <File FileName="Assets/Scripts/GameStateController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LevelsMenuController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/InputManager.cs" Line="8" Column="42" />
+      <File FileName="Assets/Scripts/BlueprintController.cs" Line="239" Column="21" />
+      <File FileName="Assets/Scripts/ColorHolderController.cs" Line="167" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,7 +16,7 @@
           <Node name="Lulu" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="TempColorHolderController.cs" selected="True" />
+                <Node name="BlueprintController.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -29,13 +26,9 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="58ae2e48-efc3-4421-b68d-7843cf5b9048" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="61205db0-a810-4e70-a2d0-d123f9e07e05" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/draqqonfly/Games/Lulu/Assets/Scripts/ColorsController.cs" relfile="Assets/Scripts/ColorsController.cs" line="38" column="1" />
-      <Breakpoint file="/Users/draqqonfly/Games/Lulu/Assets/Scripts/LevelChooserController.cs" relfile="Assets/Scripts/LevelChooserController.cs" line="65" column="1" />
-      <Breakpoint file="/Users/draqqonfly/Games/Lulu/Assets/Scripts/LevelDataHolder.cs" relfile="Assets/Scripts/LevelDataHolder.cs" line="109" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

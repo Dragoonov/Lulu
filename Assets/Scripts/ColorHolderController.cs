@@ -155,6 +155,16 @@ public class ColorHolderController : MonoBehaviour, IClickable
         Debug.Log(newColor);
         return newColor;
     }
+
+    private void HighlightTempHolder(bool value)
+    {
+        GameObject tempHolder = GameObject.FindGameObjectWithTag("TempHolder");
+        if (tempHolder != null && tempHolder.activeInHierarchy)
+        {
+            tempHolder.GetComponent<TempColorHolderController>().state.Highlighted = value;
+        }
+    }
+
     public class HolderState
     {
         private ColorHolderController controller;
@@ -174,22 +184,7 @@ public class ColorHolderController : MonoBehaviour, IClickable
             }
             set
             {
-                if(controller.blueprints.Count >=2)
-                {
-                    foreach (GameObject blueprint in controller.blueprints)
-                    {
-                        BlueprintController blueprintController = blueprint.GetComponent<BlueprintController>();
-                        if(!blueprintController.state.Blocked && !blueprintController.state.Locked)
-                        {
-                            blueprintController.state.Highlighted = value;
-                        }
-                    }
-                }
-                GameObject tempHolder = GameObject.FindGameObjectWithTag("TempHolder");
-                if(tempHolder != null && tempHolder.activeInHierarchy)
-                {
-                    tempHolder.GetComponent<TempColorHolderController>().state.Highlighted = value;
-                }
+                controller.HighlightTempHolder(value);
                 this._selected = value;
             }
         }

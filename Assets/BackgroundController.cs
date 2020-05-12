@@ -5,7 +5,6 @@ using UnityEngine;
 public class BackgroundController : MonoBehaviour, IClickable
 {
     List<BlueprintController> blueprints;
-    ColorHolderController holder;
     TempColorHolderController tempHolder;
 
     public delegate void SelectAction();
@@ -34,7 +33,6 @@ public class BackgroundController : MonoBehaviour, IClickable
         {
             blueprints.Add(tem.GetComponent<BlueprintController>());
         }
-        holder = GameObject.FindGameObjectWithTag("Holder").GetComponent<ColorHolderController>();
         tempHolder = GameObject.FindGameObjectWithTag("TempHolder").GetComponent<TempColorHolderController>();
     }
     void Start()

@@ -15,6 +15,8 @@ public class BlueprintController : MonoBehaviour, IClickable
     public BlueprintState state;
     private ColorHolderController holder;
     private TempColorHolderController tempHolder;
+    [SerializeField] private Material materialGlow;
+    private Material materialDefault;
 
     public delegate void SelectAction(GameObject blueprint);
     public event SelectAction OnSelected;
@@ -33,6 +35,7 @@ public class BlueprintController : MonoBehaviour, IClickable
         tempHolder = GameObject.FindGameObjectWithTag("TempHolder").GetComponent<TempColorHolderController>();
         spawnAmountObj.text = "";
         tempColor = renderer.color;
+        materialDefault = renderer.material;
         state.Blocked = false;
         state.Locked = false;
         state.Highlighted = false;
@@ -42,6 +45,7 @@ public class BlueprintController : MonoBehaviour, IClickable
 
     void Start()
     {
+
     }
 
     private void Update()
@@ -231,11 +235,16 @@ public class BlueprintController : MonoBehaviour, IClickable
                 }
                 if (value)
                 {
+                    controller.renderer.material = controller.materialGlow;
+                    
                     Debug.Log(controller.gameObject.name + "highlighted");
+                    
                 }
                 if (!value)
                 {
+                    controller.renderer.material = controller.materialDefault;
                     Debug.Log(controller.gameObject.name + "not highlighted");
+                    
                 }
                 this._highlighted = value;
             }

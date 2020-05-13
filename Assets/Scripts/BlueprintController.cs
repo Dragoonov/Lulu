@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class BlueprintController : MonoBehaviour, IClickable
@@ -48,7 +45,7 @@ public class BlueprintController : MonoBehaviour, IClickable
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(state.Selected)
         {
@@ -100,9 +97,12 @@ public class BlueprintController : MonoBehaviour, IClickable
         else if (tempHolder != null && tempHolder.isActiveAndEnabled && tempHolder.state.Selected)
         {
             SpriteRenderer holderRenderer = tempHolder.GetComponent<SpriteRenderer>();
+            tempHolder.GetComponent<TempColorHolderController>().HighlightBlueprints(false);
             renderer.color = holderRenderer.color;
+            holder.UpdateColor();
             Destroy(tempHolder.gameObject);
             tempHolder = null;
+
         }
         else
         {
@@ -200,23 +200,24 @@ public class BlueprintController : MonoBehaviour, IClickable
             }
             set
             {
-                if (Blocked)
-                {
-                    return;
-                }
                 if (value == true)
                 {
-                    tempColor = controller.renderer.color;
-                    controller.renderer.color = Color.gray;
-                    controller.gameObject.GetComponent<Collider2D>().enabled = false;
+                    controller.renderer.color = new Color(
+                        controller.renderer.color.r,
+                        controller.renderer.color.g,
+                        controller.renderer.color.b,
+                        0.1f);
 
                 }
                 if (value == false)
                 {
-                    controller.gameObject.GetComponent<Collider2D>().enabled = true;
-                    controller.renderer.color = tempColor;
+                    controller.renderer.color = new Color(
+                        controller.renderer.color.r,
+                        controller.renderer.color.g,
+                        controller.renderer.color.b,
+                        1f);
                 }
-                this._selected = value;
+                this._disabled = value;
             }
         }
 
@@ -235,15 +236,15 @@ public class BlueprintController : MonoBehaviour, IClickable
                 }
                 if (value)
                 {
-                    controller.renderer.material = controller.materialGlow;
+                    //controller.renderer.material = controller.materialGlow;
                     
-                    Debug.Log(controller.gameObject.name + "highlighted");
+                   // Debug.Log(controller.gameObject.name + "highlighted");
                     
                 }
                 if (!value)
                 {
-                    controller.renderer.material = controller.materialDefault;
-                    Debug.Log(controller.gameObject.name + "not highlighted");
+                    //controller.renderer.material = controller.materialDefault;
+                    //Debug.Log(controller.gameObject.name + "not highlighted");
                     
                 }
                 this._highlighted = value;

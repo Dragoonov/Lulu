@@ -8,6 +8,7 @@ public class ColorHolderController : MonoBehaviour, IClickable
     private SpriteRenderer renderer;
     [SerializeField]
     private List<GameObject> blueprints;
+    private List<GameObject> allBlueprints;
     public Color defaultColor;
     public HolderState state;
     private const int SELECTED_SCALE = 14;    
@@ -17,12 +18,13 @@ public class ColorHolderController : MonoBehaviour, IClickable
         renderer = GetComponent<SpriteRenderer>();
         Debug.Log(renderer);
         blueprints = new List<GameObject>();
+        allBlueprints = new List<GameObject>(GameObject.FindGameObjectsWithTag("Blueprint"));
         defaultColor = renderer.color;
         SubscribeToBlueprints();
         state = new HolderState(this);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (state.Selected)
         {
@@ -84,7 +86,7 @@ public class ColorHolderController : MonoBehaviour, IClickable
     }
     
           
-    private void UpdateColor()
+    public void UpdateColor()
     {
         if (blueprints.Count <= 1)
         {
@@ -101,10 +103,11 @@ public class ColorHolderController : MonoBehaviour, IClickable
 
     internal void ClearBlueprints()
     {
-        foreach (GameObject blueprint in blueprints)
+        foreach (GameObject blueprint in allBlueprints)
         {
             blueprint.GetComponent<BlueprintController>().state.Selected = false;
             blueprint.GetComponent<BlueprintController>().state.Highlighted = false;
+            blueprint.GetComponent<BlueprintController>().state.Disabled = false;
         }
         blueprints.Clear();
     }
@@ -112,13 +115,20 @@ public class ColorHolderController : MonoBehaviour, IClickable
     public void OnClicked()
     {
         state.Selected = !state.Selected;
-        if (blueprints.Count >=2 && state.Selected)
+        if (blueprints.Count < 2 && state.Selected)
+        {
+            DisableBlueprints(true, true);
+            return;
+        }
+        else if (blueprints.Count >=2 && state.Selected)
         {
             HighlightBlueprints(true);
+            DisableBlueprints(true);
         }
         else if(!state.Selected)
         {
             HighlightBlueprints(false);
+            DisableBlueprints(false, true);
         }
     }
 
@@ -130,6 +140,29 @@ public class ColorHolderController : MonoBehaviour, IClickable
             if (!blueprintController.state.Locked && !blueprintController.state.Blocked)
             {
                 blueprintController.state.Highlighted = highlight;
+            }
+        }
+        DisableBlueprints(highlight);
+    }
+
+    internal void DisableBlueprints(bool disable, bool all = false)
+    {
+        if(!all)
+        {
+            List<GameObject> tempList = new List<GameObject>(allBlueprints);
+            tempList.RemoveAll(a => a.GetComponent<BlueprintController>().state.Highlighted == disable);
+            foreach (GameObject blueprint in tempList)
+            {
+                BlueprintController blueprintController = blueprint.GetComponent<BlueprintController>();
+                blueprintController.state.Disabled = disable;
+            }
+        }
+        else
+        {
+            foreach (GameObject blueprint in allBlueprints)
+            {
+                BlueprintController blueprintController = blueprint.GetComponent<BlueprintController>();
+                blueprintController.state.Disabled = disable;
             }
         }
     }

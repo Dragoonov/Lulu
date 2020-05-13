@@ -25,6 +25,18 @@ public class LockController : MonoBehaviour
         renderer.color = color;
         targetName = sprite.name;
         targetColor = color;
+        SetBackground(sprite);
+    }
+
+    private void SetBackground(Sprite sprite)
+    {
+        SpriteRenderer background = transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>();
+        background.sprite = sprite;
+        background.color = Color.black;
+        background.transform.localScale = new Vector3(
+            1.2f,
+            1.2f,
+            1.2f);
     }
 
     // Update is called once per frame

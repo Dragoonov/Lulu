@@ -22,7 +22,7 @@ public class TempColorHolderController : MonoBehaviour, IClickable
     void Start()
     {
         state = new TempHolderState(this);
-        //SetPositionViewport();
+        SetPositionViewport();
     }
 
     private void Update()
@@ -46,10 +46,10 @@ public class TempColorHolderController : MonoBehaviour, IClickable
         
     private void SetPositionViewport()
     {
-        Vector2 savebotttomLeftOffset = Camera.main.ScreenToViewportPoint(new Vector2(Screen.safeArea.x, Screen.safeArea.y));
+        Vector2 savebotttomRightOffset = Camera.main.ScreenToViewportPoint(new Vector2(Screen.safeArea.width, Screen.safeArea.y));
 
         transform.position = Camera.main.ViewportToWorldPoint(
-              new Vector3(0.1f + savebotttomLeftOffset.x, 0.5f, 10));
+              new Vector3(savebotttomRightOffset.x - 0.2f, 0.25f, 10));
     }
 
     public void OnClicked()
@@ -61,6 +61,7 @@ public class TempColorHolderController : MonoBehaviour, IClickable
             holderRenderer.color = holderController.defaultColor;
             holderController.RemoveBlueprintUsages();
             holderController.ClearBlueprints();
+            holderController.state.Selected = false;
         }
         else
         {
@@ -76,7 +77,7 @@ public class TempColorHolderController : MonoBehaviour, IClickable
         }
     }
 
-    private void HighlightBlueprints(bool highlight)
+    public void HighlightBlueprints(bool highlight)
     {
         GameObject[] blueprints = GameObject.FindGameObjectsWithTag("Blueprint");
         foreach (GameObject blueprint in blueprints)

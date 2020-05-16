@@ -92,6 +92,7 @@ public class BlueprintController : MonoBehaviour, IClickable
                 holder.state.Selected = false;
                 holderController.RemoveBlueprintUsages();
                 holderController.ClearBlueprints();
+                UpdateSpawnAmount();
             }
         }
         else if (tempHolder != null && tempHolder.isActiveAndEnabled && tempHolder.state.Selected)

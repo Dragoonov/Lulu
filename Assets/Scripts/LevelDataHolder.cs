@@ -93,6 +93,7 @@ public class LevelDataHolder
             else
             {
                 controller.spawnAmount = data.spawnAmount;
+                controller.UpdateSpawnAmount();
                 controller.gameObject.GetComponent<SpriteRenderer>().color = data.color;
                 if (data.effect == EffectType.BLOCK)
                     controller.Block(data.sprite, data.conditionColor);

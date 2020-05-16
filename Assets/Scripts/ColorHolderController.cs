@@ -118,10 +118,12 @@ public class ColorHolderController : MonoBehaviour, IClickable
         if (blueprints.Count < 2 && state.Selected)
         {
             DisableBlueprints(true, true);
+            SelectTempHolder(false);
             return;
         }
         else if (blueprints.Count >=2 && state.Selected)
         {
+            SelectTempHolder(false);
             HighlightBlueprints(true);
             DisableBlueprints(true);
         }
@@ -195,6 +197,15 @@ public class ColorHolderController : MonoBehaviour, IClickable
         if (tempHolder != null && tempHolder.activeInHierarchy)
         {
             tempHolder.GetComponent<TempColorHolderController>().state.Highlighted = value;
+        }
+    }
+
+    private void SelectTempHolder(bool select)
+    {
+        GameObject tempHolder = GameObject.FindGameObjectWithTag("TempHolder");
+        if (tempHolder != null && tempHolder.activeInHierarchy)
+        {
+            tempHolder.GetComponent<TempColorHolderController>().state.Selected = select;
         }
     }
 

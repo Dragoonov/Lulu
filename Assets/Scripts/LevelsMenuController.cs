@@ -9,6 +9,17 @@ public class LevelsMenuController : MonoBehaviour
 
     void Start()
     {
+        GameObject phoneCanvas = GameObject.Find("CanvasPhone");
+        GameObject tabletCanvas = GameObject.Find("CanvasTablet");
+        GameObject activeCanvas;
+        if(phoneCanvas != null)
+        {
+            activeCanvas = phoneCanvas;
+        }
+        else
+        {
+            activeCanvas = tabletCanvas;
+        }
         int lastLevel = GameObject.Find("GameStateController").GetComponent<GameStateController>().LastLevel;
         if(lastLevel < 0)
         {
@@ -16,7 +27,7 @@ public class LevelsMenuController : MonoBehaviour
         }
         for (int i = lastLevel + 1; i <= LEVEL_AMOUNT; i++)
         {
-            transform.Find("Button (" + i + ")").GetComponent<Button>().interactable = false;
+            activeCanvas.transform.Find("Button (" + i + ")").GetComponent<Button>().interactable = false;
         }
     }
 

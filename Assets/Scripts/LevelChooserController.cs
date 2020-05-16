@@ -326,7 +326,7 @@ public class LevelChooserController : MonoBehaviour
                 colorOwn: Color.blue,
                 //limit: 2
                 effect: EffectType.BLOCK,
-                sprite: topLeftQuarter,
+                sprite: bottomLeftQuarter,
                 color: (Color.yellow + Color.cyan) / 2
                 );
             LevelDataHolder.SetBottomLeftBlueprint(

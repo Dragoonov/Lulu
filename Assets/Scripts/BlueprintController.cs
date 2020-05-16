@@ -55,6 +55,7 @@ public class BlueprintController : MonoBehaviour, IClickable
         {
             transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, DEFAULT_SCALE, 0.05f), Mathf.Lerp(transform.localScale.y, DEFAULT_SCALE, 0.05f), transform.localScale.z);
         }
+        UpdateSpawnAmount();
     }
 
 
@@ -92,7 +93,6 @@ public class BlueprintController : MonoBehaviour, IClickable
                 holder.state.Selected = false;
                 holderController.RemoveBlueprintUsages();
                 holderController.ClearBlueprints();
-                UpdateSpawnAmount();
             }
         }
         else if (tempHolder != null && tempHolder.isActiveAndEnabled && tempHolder.state.Selected)
@@ -105,7 +105,7 @@ public class BlueprintController : MonoBehaviour, IClickable
             tempHolder = null;
 
         }
-        else
+        else if (spawnAmount > 0 )
         {
             state.Selected = !state.Selected;
             if(state.Selected)
@@ -201,6 +201,19 @@ public class BlueprintController : MonoBehaviour, IClickable
             }
             set
             {
+                SpriteRenderer shape;
+                SpriteRenderer icon;
+                if (controller.lockObject.activeInHierarchy)
+                {
+                    shape = controller.lockObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+                    icon = controller.lockObject.GetComponent<SpriteRenderer>();
+                }
+                else
+                {
+                    shape = controller.blockObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+                    icon = controller.blockObject.GetComponent<SpriteRenderer>();
+                }
+                SpriteRenderer background = shape.transform.GetChild(0).GetComponent<SpriteRenderer>();
                 if (value == true)
                 {
                     controller.renderer.color = new Color(
@@ -208,7 +221,10 @@ public class BlueprintController : MonoBehaviour, IClickable
                         controller.renderer.color.g,
                         controller.renderer.color.b,
                         0.1f);
-
+                    shape.color = new Color(shape.color.r, shape.color.g, shape.color.b, 0.1f);
+                    background.color = new Color(background.color.r, background.color.g, background.color.b, 0.1f);
+                    controller.spawnAmountObj.color = new Color(controller.spawnAmountObj.color.r, controller.spawnAmountObj.color.g, controller.spawnAmountObj.color.b, .1f);
+                    icon.color = new Color(icon.color.r, icon.color.g, icon.color.b, .1f);
                 }
                 if (value == false)
                 {
@@ -217,6 +233,10 @@ public class BlueprintController : MonoBehaviour, IClickable
                         controller.renderer.color.g,
                         controller.renderer.color.b,
                         1f);
+                    shape.color = new Color(shape.color.r, shape.color.g, shape.color.b, 1f);
+                    background.color = new Color(background.color.r, background.color.g, background.color.b, 1f);
+                    controller.spawnAmountObj.color = new Color(controller.spawnAmountObj.color.r, controller.spawnAmountObj.color.g, controller.spawnAmountObj.color.b, 1f);
+                    icon.color = new Color(icon.color.r, icon.color.g, icon.color.b, 1f);
                 }
                 this._disabled = value;
             }

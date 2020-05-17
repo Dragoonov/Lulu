@@ -46,7 +46,8 @@ public class HelpController : MonoBehaviour
         GameObject bluePrint = GameObject.Find(tintName + "Blueprint");
         if (bluePrint == null)
             return Color.black;
-        return bluePrint.GetComponent<SpriteRenderer>().color;
+        Color blueprintColor = bluePrint.GetComponent<SpriteRenderer>().color;
+        return new Color(blueprintColor.r, blueprintColor.g, blueprintColor.b, 1);
     }
 
     private Color MixColors(Color color1, Color color2)

@@ -1434,4 +1434,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MainScene.unity
   - Assets/Scenes/LevelsMenu.unity
   - Assets/Scenes/OptionsMenu.unity
-  playerPath: C:/Users/Draqqonfly/Desktop/Lulu/Lulu.apk
+  playerPath: C:/Users/Draqqonfly/Desktop/MyProjects/Lulu/Lulu.apk
